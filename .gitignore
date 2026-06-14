@@ -1,0 +1,15 @@
+__pycache__/
+
+*.log
+*.out
+*.err
+*.csv
+*.zip
+*.ckpt
+*.lock 
+.venv
+.env
+
+# Documentation
+docs/_build
+docs/autoapi
