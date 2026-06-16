@@ -90,7 +90,6 @@ napoleon_use_rtype = True
 
 html_theme_options = {
     "header_links_before_dropdown": 6,
-    "gitlab_url": "https://gitlab.pleiade.edf.fr/data-impulse/ts-icl",
     "secondary_sidebar_items": {
         "**": ["page-toc"],
         "index": [],

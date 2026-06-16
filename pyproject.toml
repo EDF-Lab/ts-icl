@@ -53,6 +53,9 @@ docs = [
     "sphinxcontrib-mermaid>=2.0.2",
 ]
 
+[project.urls]
+Repository    = "https://github.com/EDF-Lab/ts-icl"
+Documentation = "https://edf-lab.github.io/ts-icl/"
 
 [build-system]
 requires = ["hatchling>=1.26.1"]  # https://github.com/pypa/hatch/issues/1818
