@@ -12,8 +12,13 @@ jobs:
   build-and-deploy:
     name: Build HTML and deploy to GitHub Pages
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     permissions:
       contents: write
+      pages: write
+      id-token: write
       
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -43,8 +48,12 @@ jobs:
         run: uv run sphinx-build -b html docs docs/build/html
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/build/html
-          publish_branch: gh-pages
+        id: deployment
+        uses: sphinx-notes/pages@v3
+
+      # - name: Deploy to GitHub Pages
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: docs/build/html
+      #     publish_branch: gh-pages
