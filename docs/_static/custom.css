@@ -1,0 +1,52 @@
+/* Main index page overview cards */
+
+.sd-card .sd-card-img-top {
+    max-height: 80px;
+    max-width: 240px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    background: none !important;
+}
+
+html[data-theme="light"] {
+    --pst-color-secondary: #459db9;
+}
+
+html[data-theme="dark"] {
+    --pst-color-secondary: #459db9;
+}
+
+html[data-theme="light"],
+html[data-theme="dark"] {
+    --pst-color-secondary-hover: #094d63;
+}
+
+html[data-theme="dark"] .vertical-legend-customer {
+    background-color: #3d4e60;
+}
+
+html[data-theme="dark"] .vertical-legend-timestep {
+    background-color: #3d4e60;
+}
+
+.navbar {
+    min-height: 100px;
+}
+
+.navbar-brand img.logo__image {
+    min-height: 100px !important;
+    min-width: 100px !important;
+    width: auto;
+    padding: 15px;
+}
+
+html[data-theme="light"] #pst-header {
+    background-color: #fdfdfd !important;  /* ta couleur */
+}
+
+
+:root {
+    --sd-color-secondary: #459db9;
+    --sd-color-secondary-highlight: #094d63;
+}

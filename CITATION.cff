@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+title: "TS-ICL: A Flexible Time-Indexed Foundation Model for Time Series via In-Context Learning"
+message: "If you find TS-ICL useful for your research, please consider citing the associated paper."
+authors:
+  - family-names: Le Naour
+    given-names: Etienne
+  - family-names: Nabil
+    given-names: Tahar
+  - family-names: Petralia
+    given-names: Adrien
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Le Naour
+      given-names: Etienne
+    - family-names: Nabil
+      given-names: Tahar
+    - family-names: Petralia
+      given-names: Adrien
+  title: "TS-ICL: A Flexible Time-Indexed Foundation Model for Time Series via In-Context Learning"
+  journal: "arXiv preprint arXiv:2606.05878"
+  year: 2026

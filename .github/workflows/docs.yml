@@ -1,0 +1,50 @@
+name: Documentation
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    name: Build HTML and deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      
+      - name: Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install package with docs dependencies
+        run: uv sync --only-group docs
+
+      - name: Install pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+  
+      - name: Run notebook preparation script (path fix)
+        run: |
+          chmod +x docs/src/copy_and_update_nbs.sh
+          ./docs/src/copy_and_update_nbs.sh
+   
+      - name: Build HTML documentation
+        run: uv run sphinx-build -b html docs docs/build/html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/build/html
+          publish_branch: gh-pages
