@@ -1,0 +1,730 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>TS-ICL : A Flexible Time-Indexed Foundation Model for Time Series via In-Context Learning &#8212; TS-ICL 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/css/lightbox.min.css?v=6e7d0de0" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=8d9ca4e1" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/lightbox-plus-jquery.min.js?v=f0ca4bb6"></script>
+    <script>lightbox.option({"alwaysShowNavOnTouchDevices": false, "albumLabel": "Image %1 of %2", "disableScrolling": false, "fadeDuration": 600, "fitImagesInViewport": true, "imageFadeDuration": 600, "positionFromTop": 50, "resizeDuration": 700, "showImageNumberLabel": true, "wrapAround": true})</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="icon" href="_static/logo-tsicl.jpeg"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Quickstart" href="src/0_quickstart.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo-tsicl.jpeg" class="logo__image only-light" alt="TS-ICL 0.1.0 documentation - Home"/>
+    <img src="_static/logo-tsicl.jpeg" class="logo__image only-dark pst-js-only" alt="TS-ICL 0.1.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="src/0_quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="pages/01_get_started_forecasting.html">
+    Forecasting
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="pages/02_get_started_imputation.html">
+    Imputation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="autoapi/index.html">
+    API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://gitlab.pleiade.edf.fr/data-impulse/ts-icl" title="GitLab" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-gitlab fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitLab</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="src/0_quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="pages/01_get_started_forecasting.html">
+    Forecasting
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="pages/02_get_started_imputation.html">
+    Imputation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="autoapi/index.html">
+    API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://gitlab.pleiade.edf.fr/data-impulse/ts-icl" title="GitLab" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-gitlab fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitLab</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ts-icl-a-flexible-time-indexed-foundation-model-for-time-series-via-in-context-learning">
+<h1>TS-ICL : A Flexible Time-Indexed Foundation Model for Time Series via In-Context Learning<a class="headerlink" href="#ts-icl-a-flexible-time-indexed-foundation-model-for-time-series-via-in-context-learning" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://arxiv.org/abs/2606.05878"><a href="https://img.shields.io/badge/arXiv-2606.05878-b31b1b.svg" data-lightbox="image-set">
+<img alt="arXiv" src="https://img.shields.io/badge/arXiv-2606.05878-b31b1b.svg" /></a>
+</a> <a class="reference external" href="https://pypi.org/project/tsicl"><a href="https://img.shields.io/pypi/v/tsicl.svg" data-lightbox="image-set">
+<img alt="PyPI" src="https://img.shields.io/pypi/v/tsicl.svg" /></a>
+</a> <a class="reference external" href="https://www.python.org/"><a href="https://img.shields.io/badge/python-%3E%3D3.12-blue.svg" data-lightbox="image-set">
+<img alt="Python" src="https://img.shields.io/badge/python-%3E%3D3.12-blue.svg" /></a>
+</a></p>
+<p>TS-ICL is a continuous probabilistic Time Series Foundation Model (TSFM) that unifies forecasting and imputation in a single zero-shot architecture, requiring no task-specific training or fine-tuning.</p>
+<div class="toctree-wrapper compound">
+</div>
+<style>
+    .bd-main .bd-content .bd-article-container{
+        max-width:80%;
+    }
+    .vertical-legend-timestep,
+    .vertical-legend-customer {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg);
+        padding: 10px 5px;
+        font-size: 1.2em;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f9fa;
+        border-right: 1px solid #dee2e6;
+    }
+    .vertical-legend-timestep {
+        padding: 25px 5px;
+    }
+</style><br><div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-4 sd-g-2 sd-g-xs-2 sd-g-sm-2 sd-g-md-2 sd-g-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<a href="_images/index_getting_started.svg" data-lightbox="image-set">
+<img alt="" class="sd-card-img-top" src="_images/index_getting_started.svg" />
+</a>
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Quickstart</p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Check out the TS-ICL on-boarding guide.</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="src/0_quickstart.html"><span class="std std-ref">To the main quickstart</span></a></span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<a href="_images/forecast-GFC17-covar_nolegend.png" data-lightbox="image-set">
+<img alt="" class="sd-card-img-top" src="_images/forecast-GFC17-covar_nolegend.png" />
+</a>
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Forecasting</p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Check out the TS-ICL forecasting guide.</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="pages/01_get_started_forecasting.html"><span class="doc">To the forecasting quickstart</span></a></span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<a href="_images/impute-covid19-energy_nolegend.png" data-lightbox="image-set">
+<img alt="" class="sd-card-img-top" src="_images/impute-covid19-energy_nolegend.png" />
+</a>
+<div class="sd-card-header docutils">
+<p class="sd-card-text">Imputation</p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Check out the TS-ICL imputation guide.</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="pages/02_get_started_imputation.html"><span class="doc">To the imputation quickstart</span></a></span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<a href="_images/index_api.svg" data-lightbox="image-set">
+<img alt="" class="sd-card-img-top" src="_images/index_api.svg" />
+</a>
+<div class="sd-card-header docutils">
+<p class="sd-card-text">API reference</p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">The reference guide contains a detailed description of the functions,
+modules, and objects included in TS-ICL.</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="autoapi/index.html"><span class="doc">To the reference guide</span></a></span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">#</a></h2>
+<p><strong>Paper:</strong> <a class="reference external" href="https://arxiv.org/abs/2606.05878">TS-ICL: A Flexible Time-Indexed Foundation Model for Time
+Series via In-Context Learning</a></p>
+<p><strong>TS-ICL</strong> is a continuous probabilistic Time Series Foundation Model
+(TSFM) that unifies <strong>forecasting</strong> and <strong>imputation</strong> in a single
+zero-shot architecture, requiring no task-specific training or
+fine-tuning.</p>
+<a class="reference internal image-reference" href="_images/TS-ICL-v1.png"><a href="_images/TS-ICL-v1.png" data-lightbox="image-set">
+<img alt="alt" class="align-center" src="_images/TS-ICL-v1.png" style="width: 70%;" />
+</a>
+</a>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>tsicl
+</pre></div>
+</div>
+<p><strong>Requirements:</strong> Python ≥ 3.12, PyTorch ≥ 2.5.1</p>
+</section>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tsicl</span><span class="w"> </span><span class="kn">import</span> <span class="n">TSICL</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">TSICL</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="s2">&quot;checkpoints/tsicl-v1.ckpt&quot;</span><span class="p">)</span>
+
+<span class="c1"># Forecasting — predict the next 96 timesteps</span>
+<span class="n">point</span><span class="p">,</span> <span class="n">quantiles</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span>
+    <span class="n">inputs</span>            <span class="o">=</span> <span class="n">my_series</span><span class="p">,</span>        <span class="c1"># e.g. 1-D numpy array or tensor</span>
+    <span class="n">prediction_length</span> <span class="o">=</span> <span class="mi">96</span><span class="p">,</span>
+    <span class="n">quantile_levels</span>   <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
+    <span class="n">denormalize</span>       <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Imputation — reconstruct NaN values</span>
+<span class="n">point</span><span class="p">,</span> <span class="n">quantiles</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">impute</span><span class="p">(</span>
+    <span class="n">inputs</span>          <span class="o">=</span> <span class="n">my_series_with_nans</span><span class="p">,</span>
+    <span class="n">quantile_levels</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
+    <span class="n">denormalize</span>     <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Both methods return a <code class="docutils literal notranslate"><span class="pre">(point_prediction,</span> <span class="pre">quantile_predictions)</span></code>
+tuple. <strong>NaN values are handled natively</strong> — no preprocessing required.</p>
+</section>
+<hr class="docutils" />
+<section id="notebooks">
+<h3>Notebooks<a class="headerlink" href="#notebooks" title="Link to this heading">#</a></h3>
+<p>Step-by-step tutorials on synthetic Gaussian Processes:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Notebook</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="pages/02_get_started_imputation">get_started_imputation.ipynb</a></p></td>
+<td><p>Pointwise &amp; block missingness,
+covariate-aware imputation,
+output format, batch processing</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="pages/01_get_started_forecasting">get_started_forecasting.ipynb</a></p></td>
+<td><p>Univariate forecasting, partially
+observed look-back,
+covariate-aware forecasting,
+batch processing</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="model">
+<h3>Model<a class="headerlink" href="#model" title="Link to this heading">#</a></h3>
+<p>TS-ICL processes each time series through four successive modules:</p>
+<ol class="arabic simple">
+<li><p><strong>Time Series Encoder</strong> — a Perceiver-like architecture that
+compresses observed (timestamp, value) pairs into M = 32 learnable
+latent tokens via cross-attention. Accepts inputs of <strong>arbitrary
+length</strong> without preprocessing.</p></li>
+<li><p><strong>Channel Mixer</strong> — aggregates information across channels via
+cross-attention. Selectively integrates covariate representations
+into the target’s representation when covariates are provided.</p></li>
+<li><p><strong>Temporal Context Query Module</strong> — maps any query timestamp to a
+context-aware embedding using Fourier (NeRF-style) positional
+encoding. Enables prediction at arbitrary timestamps, including on
+<strong>irregular grids</strong>.</p></li>
+<li><p><strong>In-Context Regressor</strong> — a causal Transformer that reads observed
+(representation, value) pairs as in-context training examples and
+outputs <strong>99 quantiles</strong> at the queried timestamps.</p></li>
+</ol>
+<p>A single checkpoint (<code class="docutils literal notranslate"><span class="pre">tsicl-v1.ckpt</span></code>) contains two specialised
+components — one trained with masking for imputation, one with causal
+masking for forecasting — sharing the same architecture backbone.</p>
+</section>
+<hr class="docutils" />
+<section id="performance">
+<h3>Performance<a class="headerlink" href="#performance" title="Link to this heading">#</a></h3>
+<section id="forecasting-fev-bench">
+<h4>Forecasting — <code class="docutils literal notranslate"><span class="pre">fev-bench</span></code><a class="headerlink" href="#forecasting-fev-bench" title="Link to this heading">#</a></h4>
+<p>TS-ICL is highly competitive with the best forecasting foundation
+models, while being <strong>fast</strong> at inference. TS-ICL <strong>efficently leverages
+covariate</strong> (when relevant) and is also <strong>robust to sparse look-back
+windows</strong>.</p>
+<a class="reference internal image-reference" href="_images/fevbench.png"><a href="_images/fevbench.png" data-lightbox="image-set">
+<img alt="alt" class="align-center" src="_images/fevbench.png" style="width: 70%;" />
+</a>
+</a>
+<p><em>Example — pointwise forecast with a known covariate (GFC17 dataset):</em></p>
+<a class="reference internal image-reference" href="_images/forecast-GFC17-covar.png"><a href="_images/forecast-GFC17-covar.png" data-lightbox="image-set">
+<img alt="alt" class="align-center" src="_images/forecast-GFC17-covar.png" style="width: 70%;" />
+</a>
+</a>
+</section>
+<section id="forecasting-time-benchmark">
+<h4>Forecasting — <code class="docutils literal notranslate"><span class="pre">TIME</span> <span class="pre">benchmark</span></code><a class="headerlink" href="#forecasting-time-benchmark" title="Link to this heading">#</a></h4>
+<a class="reference internal image-reference" href="_images/Time-Benchmark.png"><a href="_images/Time-Benchmark.png" data-lightbox="image-set">
+<img alt="alt" class="align-center" src="_images/Time-Benchmark.png" style="width: 70%;" />
+</a>
+</a>
+</section>
+<section id="imputation-fm-impute-bench">
+<h4>Imputation — <code class="docutils literal notranslate"><span class="pre">fm-impute-bench</span></code><a class="headerlink" href="#imputation-fm-impute-bench" title="Link to this heading">#</a></h4>
+<p>TS-ICL achieves <strong>state-of-the-art imputation</strong> across 132 univariate
+and 24 covariate-aware tasks, outperforming the best tabular foundation
+model baseline while being <strong>~50× faster</strong> at inference.</p>
+<a class="reference internal image-reference" href="_images/fm-impute-bench.png"><a href="_images/fm-impute-bench.png" data-lightbox="image-set">
+<img alt="alt" class="align-center" src="_images/fm-impute-bench.png" style="width: 70%;" />
+</a>
+</a>
+<p><em>Example — block imputation with uncertainty quantification (COVID-19
+energy dataset):</em></p>
+<a class="reference internal image-reference" href="_images/impute-covid19-energy.png"><a href="_images/impute-covid19-energy.png" data-lightbox="image-set">
+<img alt="alt" class="align-center" src="_images/impute-covid19-energy.png" style="width: 70%;" />
+</a>
+</a>
+</section>
+</section>
+<hr class="docutils" />
+<section id="citation">
+<h3>Citation<a class="headerlink" href="#citation" title="Link to this heading">#</a></h3>
+<p>If you use TS-ICL for research purposes, please consider citing the
+associated paper:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">lenaour2026tsicl</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{TS-ICL: A Flexible Time-Indexed Foundation Model for Time Series via In-Context Learning}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{Le Naour, Etienne and Nabil, Tahar and Petralia, Adrien}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">journal</span><span class="p">=</span><span class="s">{arXiv preprint arXiv:2606.05878}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="p">=</span><span class="s">{2026}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="contributors">
+<h3>Contributors<a class="headerlink" href="#contributors" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/EtienneLnr">Etienne Le Naour</a></p></li>
+<li><p><a class="reference external" href="https://github.com/TaharNbl">Tahar Nabil</a></p></li>
+<li><p><a class="reference external" href="https://github.com/adrienpetralia">Adrien Petralia</a></p></li>
+<li><p>Marc Héry (EDF)</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="license">
+<h3>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h3>
+<p>TS-ICL weights and code are released under a non-commercial license, see
+<a class="reference external" href="LICENSE">LICENSE</a>.</p>
+</section>
+<section id="contact">
+<h3>Contact<a class="headerlink" href="#contact" title="Link to this heading">#</a></h3>
+<p>To learn more or request a commercial license, please contact us at:
+tsicl-contact_at_edf.fr (replace <em>at</em> with &#64;).</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="src/0_quickstart.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Quickstart</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, EDF.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

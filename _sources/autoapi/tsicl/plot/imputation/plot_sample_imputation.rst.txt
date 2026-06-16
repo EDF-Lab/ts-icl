@@ -1,0 +1,36 @@
+tsicl.plot.imputation.plot_sample_imputation
+============================================
+
+.. py:function:: tsicl.plot.imputation.plot_sample_imputation(quantiles: numpy.ndarray | torch.Tensor, y_ctx: numpy.ndarray | torch.Tensor, y_true: numpy.ndarray | torch.Tensor | None = None, quantiles_univar: numpy.ndarray | torch.Tensor | None = None, quantile_levels: list | None = None, show_context_points: bool = False, plot_iqr: bool = False, z_normalize: bool = False, model_name: str = 'TS-ICL', iqr_bands: Sequence = ((0.05, 0.95), (0.25, 0.75)), max_points: int = -1, is_blockwise: bool = False) -> Tuple[matplotlib.figure.Figure, matplotlib.axes.Axes]
+
+   Imputation plot util for a single sample.
+
+   :param quantiles: array of predicted quantiles, shape `(t, q)`
+   :type quantiles: np.ndarray | torch.Tensor
+   :param y_ctx: available context as a 1D-array of len `t` with `NaN`s
+   :type y_ctx: np.ndarray | torch.Tensor
+   :param y_true: 1D-array of ground truth, len `t`
+   :type y_true: np.ndarray | torch.Tensor | None
+   :param quantiles_univar: if `quantiles` is predicted with covariates
+                            quantiles_univar is the estimated same target variable but without covariates.
+                            array of predicted quantiles, shape `(t, q)`
+   :type quantiles_univar: np.ndarray | torch.Tensor | None
+   :param quantile_levels: list of the `q` quantile levels used in `quantiles`
+   :type quantile_levels: list | None
+   :param show_context_points: whether to show available observations as markers
+   :type show_context_points: bool
+   :param plot_iqr: whether to plot InterQuantile Ranges, if available
+   :type plot_iqr: bool
+   :param z_normalize: whether to z-normalize all data before plotting
+   :type z_normalize: bool
+   :param model_name: model name to use in legend
+   :type model_name: str
+   :param iqr_bands: iterable sequence of IQRs bands (low, high) to plot
+   :type iqr_bands: Sequence
+   :param max_points: how many time points to plot (will plot all if <0)
+   :type max_points: int
+   :param is_blockwise: if True, assumes that missing points are contiguous and will shade the corresponding regions
+   :type is_blockwise: bool
+
+   :returns: The corresponding `matplotlib` figure and axes.
+

@@ -1,0 +1,40 @@
+tsicl.utils.scaler.CustomStandardScaler
+=======================================
+
+.. py:class:: tsicl.utils.scaler.CustomStandardScaler(dim: Union[int, tuple] = 1, epsilon: float = 1e-05)
+
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: fit(X: torch.Tensor, mask: torch.Tensor | None = None) -> None
+
+
+   .. py:method:: inv_transform(X: torch.Tensor, mask: Optional[torch.Tensor] = None) -> torch.Tensor
+
+
+   .. py:method:: transform(X: torch.Tensor) -> torch.Tensor
+
+
+   .. py:attribute:: __slots__
+      :value: ()
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: epsilon
+      :value: 1e-05
+
+
+
+   .. py:attribute:: mean
+
+
+   .. py:attribute:: std
+

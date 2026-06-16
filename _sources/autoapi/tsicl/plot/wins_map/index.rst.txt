@@ -1,0 +1,32 @@
+tsicl.plot.wins_map
+===================
+
+.. py:module:: tsicl.plot.wins_map
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   tsicl.plot.wins_map.data
+
+
+Functions
+---------
+
+.. toctree::
+   :hidden:
+
+   /autoapi/tsicl/plot/wins_map/plot_win_rate_heatmap_simple
+
+.. autoapisummary::
+
+   tsicl.plot.wins_map.plot_win_rate_heatmap_simple
+
+
+Module Contents
+---------------
+
+.. py:data:: data
+

@@ -1,0 +1,19 @@
+tsicl.utils.task_utils.prepare_context_tensors
+==============================================
+
+.. py:function:: tsicl.utils.task_utils.prepare_context_tensors(grid: torch.Tensor, series_c: torch.Tensor, covariates: torch.Tensor | None = None) -> Dict[str, torch.Tensor]
+
+   Prepare context tensors for forward pass.
+
+   :param grid: Raw time grid of shape `(bs, T, 1)`.
+   :type grid: torch.Tensor
+   :param series_c: Tensor of past values of shape `(bs, T, 1)`.
+   :type series_c: torch.Tensor
+   :param covariates: Tensor of covariates of shape `(bs, c, T, 1)`.
+   :type covariates: torch.Tensor, optional
+
+   :returns: **out** -- Dict with keys `coords_c` (context coordinates),
+             `series_c` (context values),
+             `covar_c` (context covariates, if any).
+   :rtype: Dict[str, torch.Tensor]
+

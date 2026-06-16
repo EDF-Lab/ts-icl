@@ -1,0 +1,21 @@
+tsicl.utils.data_adapter
+========================
+
+.. py:module:: tsicl.utils.data_adapter
+
+
+Functions
+---------
+
+.. toctree::
+   :hidden:
+
+   /autoapi/tsicl/utils/data_adapter/validate_covar_inputs
+   /autoapi/tsicl/utils/data_adapter/validate_target_inputs
+
+.. autoapisummary::
+
+   tsicl.utils.data_adapter.validate_covar_inputs
+   tsicl.utils.data_adapter.validate_target_inputs
+
+

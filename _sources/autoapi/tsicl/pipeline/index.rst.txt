@@ -1,0 +1,19 @@
+tsicl.pipeline
+==============
+
+.. py:module:: tsicl.pipeline
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /autoapi/tsicl/pipeline/TSICL
+
+.. autoapisummary::
+
+   tsicl.pipeline.TSICL
+
+

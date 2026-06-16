@@ -1,0 +1,23 @@
+tsicl.utils.scaler
+==================
+
+.. py:module:: tsicl.utils.scaler
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /autoapi/tsicl/utils/scaler/AbstractCustomScaler
+   /autoapi/tsicl/utils/scaler/CustomMinmaxScaler
+   /autoapi/tsicl/utils/scaler/CustomStandardScaler
+
+.. autoapisummary::
+
+   tsicl.utils.scaler.AbstractCustomScaler
+   tsicl.utils.scaler.CustomMinmaxScaler
+   tsicl.utils.scaler.CustomStandardScaler
+
+

@@ -1,0 +1,19 @@
+tsicl.plot.forecasting
+======================
+
+.. py:module:: tsicl.plot.forecasting
+
+
+Functions
+---------
+
+.. toctree::
+   :hidden:
+
+   /autoapi/tsicl/plot/forecasting/plot_sample_forecast
+
+.. autoapisummary::
+
+   tsicl.plot.forecasting.plot_sample_forecast
+
+

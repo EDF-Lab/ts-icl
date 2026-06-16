@@ -1,0 +1,3 @@
+{
+    "path": "../src/01_get_started_forecasting.ipynb"
+}

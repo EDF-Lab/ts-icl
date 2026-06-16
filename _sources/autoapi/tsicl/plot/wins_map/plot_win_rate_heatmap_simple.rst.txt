@@ -1,0 +1,14 @@
+tsicl.plot.wins_map.plot_win_rate_heatmap_simple
+================================================
+
+.. py:function:: tsicl.plot.wins_map.plot_win_rate_heatmap_simple(df_scores: pandas.DataFrame, save_path: pathlib.Path, top_k_y: int = 4, higher_is_better: bool = False)
+
+   Generates a win rate heatmap comparing different methods,
+   without confidence intervals.
+
+   Arguments:
+   - df_scores: Pandas DataFrame with N rows (datasets) and D columns (methods).
+   - top_k_y: Number of top-performing methods to display on the Y-axis.
+   - higher_is_better: True if a higher score is better (e.g., Accuracy),
+                       False if a lower score is better (e.g., RMSE, MAE).
+

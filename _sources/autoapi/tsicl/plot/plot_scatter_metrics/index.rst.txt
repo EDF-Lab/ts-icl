@@ -1,0 +1,34 @@
+tsicl.plot.plot_scatter_metrics
+===============================
+
+.. py:module:: tsicl.plot.plot_scatter_metrics
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   tsicl.plot.plot_scatter_metrics.methods
+
+
+Functions
+---------
+
+.. toctree::
+   :hidden:
+
+   /autoapi/tsicl/plot/plot_scatter_metrics/plot_mase_vs_crps
+
+.. autoapisummary::
+
+   tsicl.plot.plot_scatter_metrics.plot_mase_vs_crps
+
+
+Module Contents
+---------------
+
+.. py:data:: methods
+   :value: ['Chronos-2', 'TimesFM-2.5', 'Moirai2', 'TS-ICL', 'Prophet', 'ETS', 'Linear']
+
+

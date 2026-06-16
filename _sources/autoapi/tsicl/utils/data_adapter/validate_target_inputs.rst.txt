@@ -1,0 +1,15 @@
+tsicl.utils.data_adapter.validate_target_inputs
+===============================================
+
+.. py:function:: tsicl.utils.data_adapter.validate_target_inputs(inputs: list | torch.Tensor | numpy.ndarray | pandas.DataFrame, batch_size: int) -> Tuple[int, bool, int, list | torch.Tensor]
+
+   Check dims and standardize all target tensor shapes.
+
+   Ignore covariates.
+
+   :returns: * **num_batches** (*int*) -- The total number of mini batches to process.
+             * **is_tensor** (*bool*) -- Whether the returned inputs are torch Tensor.
+             * **num_var** (*int*) -- Number of target variables now hidden in batch dimension.
+             * **out** (*torch.Tensor or list*) -- Preprocessed inputs as Tensors of shape `(batch, seq_len, 1)`.
+               If multiple variables to predict, all are stacked in the batch dimension.
+

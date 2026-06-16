@@ -1,0 +1,7 @@
+tsicl.plot.plot_scatter_metrics.plot_mase_vs_crps
+=================================================
+
+.. py:function:: tsicl.plot.plot_scatter_metrics.plot_mase_vs_crps(df_mase, df_crps, dict_categories)
+
+   Generates a 2D scatter plot of mean MASE vs CRPS scores with bold aesthetics.
+

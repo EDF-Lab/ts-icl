@@ -1,0 +1,40 @@
+tsicl.utils.scaler.CustomMinmaxScaler
+=====================================
+
+.. py:class:: tsicl.utils.scaler.CustomMinmaxScaler(dim: int = 1, epsilon: float = 1e-08)
+
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: fit(X: torch.Tensor) -> None
+
+
+   .. py:method:: inv_transform(X: torch.Tensor) -> torch.Tensor
+
+
+   .. py:method:: transform(X: torch.Tensor) -> torch.Tensor
+
+
+   .. py:attribute:: __slots__
+      :value: ()
+
+
+
+   .. py:attribute:: dim
+      :value: 1
+
+
+
+   .. py:attribute:: epsilon
+      :value: 1e-08
+
+
+
+   .. py:attribute:: xmax
+
+
+   .. py:attribute:: xmin
+

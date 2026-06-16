@@ -1,0 +1,18 @@
+tsicl.plot
+==========
+
+.. py:module:: tsicl.plot
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/tsicl/plot/forecasting/index
+   /autoapi/tsicl/plot/imputation/index
+   /autoapi/tsicl/plot/plot_scatter_metrics/index
+   /autoapi/tsicl/plot/wins_map/index
+
+

@@ -1,0 +1,15 @@
+tsicl.utils.data_adapter.validate_covar_inputs
+==============================================
+
+.. py:function:: tsicl.utils.data_adapter.validate_covar_inputs(covars: list | torch.Tensor | numpy.ndarray | None) -> Tuple[bool, list | torch.Tensor | None]
+
+   Check dims and standardize all covariate tensor shapes.
+
+   :param covars: Covariates of shape `(T, C)` or `(C, T, 1)`
+                  (possibly with an extra batch dimension)
+   :type covars: list | torch.Tensor | np.ndarray | None
+
+   :returns: * **is_cov_tensor** (*bool*) -- True if returned covariate is a batch Tensor.
+             * **covar** (*torch.Tensor or List[torch.Tensor] or None*) -- Tensor of covariates of shape `(bs, C, T, 1)` if all aligned,
+               other a list of covariates of shape `(C, T, 1)`.
+

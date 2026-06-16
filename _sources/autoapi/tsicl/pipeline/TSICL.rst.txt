@@ -1,0 +1,230 @@
+tsicl.pipeline.TSICL
+====================
+
+.. py:class:: tsicl.pipeline.TSICL(model_path: str | pathlib.Path | None = None, checkpoint_version: str = 'tsicl-v1.ckpt', allow_auto_download: bool = True)
+
+   Main interface for TS-ICL (Time Series In-Context Learning) foundation model.
+
+   Support both imputation and forecasting tasks.
+
+   :param model_path: Path to the pre-trained model checkpoint file.
+
+                      - If provided and the file exists, it's loaded directly.
+                      - If provided but the file doesn't exist and `allow_auto_download` is true, the version
+                        specified by `checkpoint_version` is downloaded from Hugging Face Hub (repo: 'taharnbl/TS-ICL')
+                        to this path.
+                      - If `None` (default), the version specified by `checkpoint_version` is downloaded from
+                        Hugging Face Hub (repo: 'taharnbl/TS-ICL') and cached locally in the default
+                        Hugging Face cache directory (typically `~/.cache/huggingface/hub`).
+   :type model_path: str or Path, optional, default=None
+   :param allow_auto_download: Whether to allow automatic download if the pretrained checkpoint cannot be found at the
+                               specified `model_path`.
+   :type allow_auto_download: bool, default=True
+   :param checkpoint_version: Specifies which version of the pre-trained model checkpoint to use when `model_path`
+                              is `None` or points to a non-existent file (and `allow_auto_download` is true).
+                              Checkpoints are downloaded from https://huggingface.co/taharnbl/TS-ICL.
+   :type checkpoint_version: str, default='tsicl-v1.ckpt'
+
+
+   .. py:method:: extract_latent(inputs, covars: List[torch.Tensor] | torch.Tensor | None = None, setting: Literal['imputation', 'forecasting'] = 'imputation', batch_size: int = 64, device: torch.device = torch.device('cuda'), prediction_length: int = 0) -> torch.Tensor | List[torch.Tensor]
+
+      Extract latent representation from the available context.
+
+      :param inputs: See `TSICL.impute` or `TSICL.forecast`.
+      :param covars: See `TSICL.impute` or `TSICL.forecast`.
+      :type covars: optional
+      :param setting: Whether the representation is computed from the imputation or the forecasting checkpoint.
+      :type setting: Literal['imputation', 'forecasting']
+      :param batch_size: The batch size used for prediction.
+      :type batch_size: int
+      :param device: Set device for inference run.
+      :type device: torch.device
+
+      :returns: **all_latents** -- Extracted representations as a Tensor or a list of Tensor.
+                If Tensor, the output shape is `(batch, num_variates, num_latents, hidden_dim)`, otherwise
+                each element of the list has shape `(num_variates, context_length, 1)`.
+      :rtype: torch.Tensor or List[torch.Tensor]
+
+
+
+   .. py:method:: forecast(inputs, covars: List[torch.Tensor] | torch.Tensor | numpy.ndarray | None = None, prediction_length: int = 0, batch_size: int = 64, quantile_levels: List[float] = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], context_length: int | None = None, device: torch.device | None = None, denormalize: bool = True, point_estimator: Literal['mean', 'median'] = 'mean', allow_auto_complete: bool = False, allow_covar_forecast: bool = False, squeeze_output: bool = True) -> Tuple[torch.Tensor | List[torch.Tensor], torch.Tensor | List[torch.Tensor]]
+
+      Forecast future values for the given time series.
+
+      :param inputs: The time series to forecast.
+                     May contain `NaN`s.
+                     Can be one of:
+
+                     * A multi-dimensional array-like (`torch.Tensor` or `np.ndarray`).
+                     If 1D, the array has shape `(context_length,)`.
+                     If 2D, the array has shape `(batch, context_length)`.
+                     If 3D, the array has shape `(batch, context_length, num_variates)` with `num_variates >= 1`.
+
+                     * A list of array-likes (`torch.Tensor` or `np.ndarray`), where each element is either 1D or 2D.
+                     If 1D, the array has shape `(context_length,)`.
+                     If 2D, the array has shape `(context_length, num_variates)`.
+                     *The `context_length`s may be different across elements of the list, not the `num_variates`*.
+
+                     * A list of dictionaries, where each dictionary may have the following keys.
+                         1. `target` (required): multi-dimensional array-likes (`torch.Tensor` or `np.ndarray`).
+                         If 1D, the array has shape `(context_length,)`.
+                         If 2D, the array has shape `(context_length, num_variates)`.
+                         Forecasts will be generated for items in `target`.
+                         2. `past_covariates` (optional): a dict of past-only covariates or past values of known future covariates.
+                         The keys of the dict
+                         must be names of the covariates and values must be 1-d `torch.Tensor` or `np.ndarray`
+                         with length equal to the `context_length` of `target`.
+                         3. `future_covariates` (optional): a dict of future values of known future covariates.
+                         The keys of the dict must be names of the
+                         covariates and values must be 1-d `torch.Tensor` or `np.ndarray` with length equal to the `prediction_length`.
+                         All keys in `future_covariates` must be a subset of the keys in `past_covariates`.
+      :param covars (optional): The optional covariates available to help forecasting `inputs`.
+                                Each covariate has length `covar_length` where either
+                                `covar_length = context_length` (past-only) or
+                                `covar_length = context_length + prediction_length` (fuly-observed).
+                                Each covariate may contain `NaN` values observed at arbitrary timesteps.
+
+                                If `inputs` is a list of dicts, with keys `past_covariates` or `future_covariates`,
+                                 `covars` will be overwritten by `inputs`.
+
+                                * A multi-dimensional array-like (`torch.Tensor` or `np.ndarray`).
+                                If 1D, the array has shape `(covar_length,)`.
+                                If 2D, the array has shape `(batch, covar_length)`.
+                                If 3D, the array has shape `(batch, covar_length, num_variates)` with `num_variates >= 1`.
+
+                                * A list of array-likes (`torch.Tensor` or `np.ndarray`), where each element is either 1D or 2D.
+                                If 1D, the array has shape `(covar_length,)`.
+                                If 2D, the array has shape `(covar_length, num_variates)`.
+                                *The `covar_length`s may be different across elements of the list, not the `num_variates`*.
+      :param prediction_length: Number of timesteps to forecast (horizon).
+      :type prediction_length: int
+      :param batch_size: The batch size used for prediction.
+      :type batch_size: int
+      :param quantile_levels: Quantile levels to compute, by default [0.1, 0.2, ..., 0.9].
+                              Must be a subset of [0.01, 0.02, ..., 0.99].
+      :type quantile_levels: List[float]
+      :param context_length: Maximum length used for the lookback window at inference.
+                             Defaults to the model maximum length, 4096.
+      :type context_length: int, optional
+      :param device: Set device for inference run.
+      :type device: torch.device
+      :param denormalize: Whether to return z-normalized values (`False`) or denormalized values in data space (`True`).
+      :type denormalize: bool
+      :param point_estimator: Set pointwise estimator as the `mean` of all quantiles or as the 0.5 quantile (`'median'`).
+      :type point_estimator: Literal['mean', 'median']:
+      :param allow_auto_complete: Allow imputation of both the lookback window and/or the missing covariates, if any,
+                                  and use the reconstructed values as extended context for the target time series.
+      :type allow_auto_complete: bool
+      :param allow_covar_forecast: Allow forecasting of past-only covariates and use forecasted values as
+                                   extended context for the target time series.
+      :type allow_covar_forecast: bool
+      :param squeeze_output: If `True` squeeze all unit dims in the outputs.
+      :type squeeze_output: bool
+
+      :returns: * **mean** (*torch.Tensor or List[torch.Tensor]*) -- A batched torch Tensor or a list of torch Tensors containing containing the pointwise forecasts.
+                  If Tensor, the output shape is `(batch, num_variates, prediction_length, 1)`, otherwise
+                  each element of the list has shape `(num_variates, prediction_length, 1)`.
+                * **quantiles** (*torch.Tensor or List[torch.Tensor]*) -- A batched torch Tensor or a list of torch Tensors containing quantile forecasts.
+                  If Tensor, the output shape is `(batch, num_variates, prediction_length, len(quantile_levels))`, otherwise
+                  each element of the list has shape `(num_variates, prediction_length, len(quantile_levels))`.
+
+
+
+   .. py:method:: impute(inputs, covars: List[torch.Tensor] | torch.Tensor | None = None, batch_size: int = 64, quantile_levels: List[float] = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], device: torch.device | None = None, denormalize: bool = True, point_estimator: Literal['mean', 'median'] = 'mean', allow_auto_complete: bool = False, replace_by_gt: bool = False, squeeze_output: bool = True) -> Tuple[torch.Tensor | List[torch.Tensor], torch.Tensor | List[torch.Tensor]]
+
+      Impute missing values in the given time series.
+
+      :param inputs: The time series with missing values (`NaN`) to fill in.
+                     Can be one of:
+
+                     * A multi-dimensional array-like (`torch.Tensor` or `np.ndarray`).
+                     If 1D, the array has shape `(context_length,)`.
+                     If 2D, the array has shape `(batch, context_length)`.
+                     If 3D, the array has shape `(batch, context_length, num_variates)` with `num_variates >= 1`.
+
+                     * A list of array-likes (`torch.Tensor` or `np.ndarray`), where each element is either 1D or 2D.
+                     If 1D, the array has shape `(context_length,)`.
+                     If 2D, the array has shape `(context_length, num_variates)`.
+                     *The `context_length`s may be different across elements of the list, not the `num_variates`*.
+
+                     * A 2-dimensional `pd.DataFrame` of shape `(batch, context_length)`.
+      :param covars: The optional covariates available to help imputing `inputs`.
+                     The covariates must be aligned on the same grid as  `inputs` (sequence length is `context_length`),
+                     but may contain missing values (`NaN`s) at arbitrary instants.
+                     Can be one of:
+
+                     * A multi-dimensional array-like (`torch.Tensor` or `np.ndarray`).
+                     If 1D, the array has shape `(context_length,)` (single covariate).
+                     If 2D, the array has shape `(batch, context_length)` (single covariate).
+                     If 3D, the array has shape `(batch, context_length, num_covariates)` with `num_covariates >= 1`.
+                     If 4D, the array has shape `(batch, num_covariates, context_length, 1)`.
+
+                     * A list of array-likes (`torch.Tensor` or `np.ndarray`). Each element mutli-dimensional.
+                     If 1D, the array has shape `(context_length,)` (single covariate).
+                     If 2D, the array has shape `(context_length, num_covariates)` with `num_covariates >= 1`.
+                     If 3D, the array has shape `(context_length, num_covariates, 1)`.
+      :type covars: optional
+      :param batch_size: The batch size used for prediction.
+      :type batch_size: int
+      :param quantile_levels: Quantile levels to compute, by default [0.1, 0.2, ..., 0.9].
+                              Must be a subset of [0.01, 0.02, ..., 0.99].
+      :type quantile_levels: List[float]
+      :param device: Set device for inference run.
+      :type device: torch.device
+      :param denormalize: Whether to return z-normalized values (`False`) or denormalized values in data space (`True`).
+      :type denormalize: bool
+      :param point_estimator: Set pointwise estimator as the `mean` of all quantiles or as the 0.5 quantile (`'median'`).
+      :type point_estimator: Literal['mean', 'median']:
+      :param allow_auto_complete: Allow imputation of the missing covariates, if any, and use the reconstructed covariates
+                                  to impute the target time series.
+      :type allow_auto_complete: bool
+      :param replace_by_gt: The method always reconstructs the whole time series, incl. the available observation.
+                            However, if this arg is set to `True`, reconstructed values are replaced by the ground truth,
+                            when available.
+      :type replace_by_gt: bool
+      :param squeeze_output: If `True` squeeze all unit dims in the outputs.
+      :type squeeze_output: bool
+
+      :returns: * **mean** (*torch.Tensor or List[torch.Tensor]*) -- A batched torch Tensor or a list of torch Tensors containing containing the pointwise reconstructions.
+                  If Tensor, the output shape is `(batch, num_variates, context_length, 1)`, otherwise
+                  each element of the list has shape `(num_variates, context_length, 1)`.
+                * **quantiles** (*torch.Tensor or List[torch.Tensor]*) -- A batched torch Tensor or a list of torch Tensors containing quantile forecasts.
+                  If Tensor, the output shape is `(batch, num_variates, context_length, len(quantile_levels))`, otherwise
+                  each element of the list has shape `(num_variates, context_length, len(quantile_levels))`.
+
+
+
+   .. py:method:: input_adapter(inputs, covars: list | torch.Tensor | numpy.ndarray | None = None, batch_size: int = 32)
+
+      Preprocess raw inputs of different formats to standardized TS-ICL inputs.
+
+      :param inputs: See `TSICL.impute` or `TSICL.forecast`.
+      :param covars: See `TSICL.impute` or `TSICL.forecast`.
+      :type covars: optional
+      :param batch_size: The mini batch size used for prediction.
+      :type batch_size: int
+
+      :returns: * **inputs** (*List[torch.Tensor] or torch.Tensor*) -- Preprocessed inputs as Tensors of shape `(batch, seq_len, 1)`.
+                  If multiple variables to predict, all are stacked in the batch dimension.
+                * **covars** (*List[torch.Tensor] or torch.Tensor or None*) -- Preprocessed covariates, if any, of shape `(batch, num_covariates, covar_seq_len, 1)`.
+                * **num_var** (*int*) -- Number of target variables now hidden in batch dimension.
+                * **num_batches** (*int*) -- The total number of mini batches to process.
+                * **is_tensor** (*bool*) -- Whether the returned inputs are torch Tensor.
+                * **has_covar** (*bool*) -- Whether the returned inputs have covariates.
+
+
+
+   .. py:attribute:: allow_auto_download
+      :value: True
+
+
+
+   .. py:attribute:: checkpoint_version
+      :value: 'tsicl-v1.ckpt'
+
+
+
+   .. py:attribute:: model_path
+      :value: None
+
+

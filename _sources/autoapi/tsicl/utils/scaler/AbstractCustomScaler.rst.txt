@@ -1,0 +1,30 @@
+tsicl.utils.scaler.AbstractCustomScaler
+=======================================
+
+.. py:class:: tsicl.utils.scaler.AbstractCustomScaler
+
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: fit(X: torch.Tensor) -> None
+      :abstractmethod:
+
+
+
+   .. py:method:: inv_transform(X: torch.Tensor) -> torch.Tensor
+      :abstractmethod:
+
+
+
+   .. py:method:: transform(X: torch.Tensor) -> torch.Tensor
+      :abstractmethod:
+
+
+
+   .. py:attribute:: __slots__
+      :value: ()
+
+

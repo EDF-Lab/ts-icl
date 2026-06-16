@@ -1,0 +1,18 @@
+tsicl.utils.utils.make_grid
+===========================
+
+.. py:function:: tsicl.utils.utils.make_grid(grid_length: int, num_samples: int, end_point: float = 1.0, start_point: float = 0.0) -> torch.Tensor
+
+   Create a grid of time coords in (0, 1)
+
+   :param grid_length: number of timesteps
+   :type grid_length: int
+   :param num_samples: number of samples
+   :type num_samples: int
+   :param end_point: end point of the grid
+   :type end_point: float
+   :param start_point: start point of the grid
+   :type start_point: float
+
+   :returns: Grid as torch.Tensor of shape `(num_samples, grid_length, 1)`.
+

@@ -1,0 +1,31 @@
+tsicl.plot.forecasting.plot_sample_forecast
+===========================================
+
+.. py:function:: tsicl.plot.forecasting.plot_sample_forecast(quantiles: numpy.ndarray | torch.Tensor, y_ctx: numpy.ndarray | torch.Tensor, y_true: numpy.ndarray | torch.Tensor | None = None, quantiles_univar: numpy.ndarray | torch.Tensor | None = None, quantile_levels: list | None = None, plot_iqr: bool = False, z_normalize: bool = False, model_name: str = 'TS-ICL', iqr_bands: Sequence = ((0.05, 0.95), (0.25, 0.75)), max_points: int = -1) -> Tuple[matplotlib.figure.Figure, matplotlib.axes.Axes]
+
+   Forecasting plot util for a single sample.
+
+   :param quantiles: array of predicted quantiles, shape `(H, q)`
+   :type quantiles: np.ndarray | torch.Tensor
+   :param y_ctx: available lookback as a 1D-array of len `L` (possibly with `NaN`s)
+   :type y_ctx: np.ndarray | torch.Tensor
+   :param y_true: 1D-array of ground truth, len `H`
+   :type y_true: np.ndarray | torch.Tensor | None
+   :param quantiles_univar: array of predicted quantiles when not using the covariates, shape `(H, q)`
+   :type quantiles_univar: np.ndarray | torch.Tensor | None
+   :param quantile_levels: list of the `q` quantile levels used in `quantiles`
+   :type quantile_levels: list | None
+   :param plot_iqr: whether to plot InterQuantile Ranges, if available
+   :type plot_iqr: bool
+   :param z_normalize: whether to z-normalize all data before plotting
+                       (with stats computed from the lookback)
+   :type z_normalize: bool
+   :param model_name: model name to use in legend
+   :type model_name: str
+   :param iqr_bands: iterable sequence of IQRs bands (low, high) to plot
+   :type iqr_bands: Sequence
+   :param max_points: how many time points to plot (will plot all if <0)
+   :type max_points: int
+
+   :returns: The corresponding `matplotlib` figure and axes.
+

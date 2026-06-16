@@ -1,0 +1,17 @@
+tsicl
+=====
+
+.. py:module:: tsicl
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/tsicl/pipeline/index
+   /autoapi/tsicl/plot/index
+   /autoapi/tsicl/utils/index
+
+

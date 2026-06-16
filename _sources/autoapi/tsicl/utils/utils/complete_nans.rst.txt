@@ -1,0 +1,22 @@
+tsicl.utils.utils.complete_nans
+===============================
+
+.. py:function:: tsicl.utils.utils.complete_nans(X: torch.Tensor, grid: torch.Tensor, is_test: bool = False, X_cov: torch.Tensor | None = None) -> Dict[str, torch.Tensor]
+
+   Fills missing values (NaNs) in a target tensor
+   (replaced by observed values at random instants of the same series).
+
+   :param X: value tensor of shape `(bs, seq_len, 1)`.
+   :type X: torch.Tensor
+   :param grid: grid coord tensor of shape `(bs, seq_len, 1)`.
+   :type grid: torch.Tensor
+   :param is_test: True if test mode.
+   :type is_test: bool
+   :param X_cov: optional tensor of covariates of shape `(bs, c, seq_len, 1)`.
+                 Will not remove all NaNs from `X_cov`, only make sure it remains aligned with `X`.
+   :type X_cov: torch.Tensor | None
+
+   :returns: Dict storing `'values'` and `'coords'` tensors of shape `(bs, seq_len, 1)`
+             with duplicates instead of NaNs.
+             Also contains `'covar'` tensor if `X_cov` was supplied.
+

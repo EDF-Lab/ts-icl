@@ -1,0 +1,23 @@
+tsicl.utils.utils
+=================
+
+.. py:module:: tsicl.utils.utils
+
+
+Functions
+---------
+
+.. toctree::
+   :hidden:
+
+   /autoapi/tsicl/utils/utils/batchify
+   /autoapi/tsicl/utils/utils/complete_nans
+   /autoapi/tsicl/utils/utils/make_grid
+
+.. autoapisummary::
+
+   tsicl.utils.utils.batchify
+   tsicl.utils.utils.complete_nans
+   tsicl.utils.utils.make_grid
+
+
