@@ -36,20 +36,20 @@ jobs:
           name: dist
           path: dist/
 
-publish:
-  name: Publish to PyPI (OIDC Trusted Publishing)
-  needs: build
-  runs-on: ubuntu-latest
-  environment: pypi
-  permissions:
-    id-token: write   # required for OIDC / Trusted Publishing
+  publish:
+    name: Publish to PyPI (OIDC Trusted Publishing)
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write   # required for OIDC / Trusted Publishing
 
-  steps:
-    - name: Download distribution artifacts
-      uses: actions/download-artifact@v4
-      with:
-        name: dist
-        path: dist/
+    steps:
+      - name: Download distribution artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
 
-    - name: Publish to PyPI
-      uses: pypa/gh-action-pypi-publish@release/v1
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
