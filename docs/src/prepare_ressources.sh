@@ -14,7 +14,4 @@ for nb in docs/src/*.ipynb; do
   sed -i 's|\.\./docs/contents/|../contents/|g' "$nb"
 done
 
-# Copy readme in docs
-cp README.md docs/src/readme.md
-
 echo "Copy and update figure paths of doc notebooks done."
