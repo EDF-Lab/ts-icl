@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>TS-ICL: a Time-Indexed Foundation Model for Time Series Forecasting &amp; Imputation via In-Context Learning &#8212; TS-ICL 0.1.0 documentation</title>
+    <title>Quickstart &#8212; TS-ICL 0.1.0 documentation</title>
   
   
   
@@ -54,7 +54,7 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/lightbox-plus-jquery.min.js?v=f0ca4bb6"></script>
     <script>lightbox.option({"alwaysShowNavOnTouchDevices": false, "albumLabel": "Image %1 of %2", "disableScrolling": false, "fadeDuration": 600, "fitImagesInViewport": true, "imageFadeDuration": 600, "positionFromTop": 50, "resizeDuration": 700, "showImageNumberLabel": true, "wrapAround": true})</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'src/readme';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/00_README';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="icon" href="../_static/logo-tsicl.jpeg"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -349,7 +349,7 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">TS-ICL: a Time-Indexed Foundation Model for Time Series Forecasting &amp; Imputation via In-Context Learning</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Quickstart</span></li>
   </ul>
 </nav>
 </div>
@@ -366,35 +366,31 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div align="center">
-  <img src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/logo-tsicl.jpeg" alt="TS-ICL architecture" width="30%" />
-</div>
-<section id="ts-icl-a-time-indexed-foundation-model-for-time-series-forecasting-imputation-via-in-context-learning">
-<h1>TS-ICL: a Time-Indexed Foundation Model for Time Series Forecasting &amp; Imputation via In-Context Learning<a class="headerlink" href="#ts-icl-a-time-indexed-foundation-model-for-time-series-forecasting-imputation-via-in-context-learning" title="Link to this heading">#</a></h1>
-<p><a class="reference external" href="https://arxiv.org/abs/2606.05878"><a href="https://img.shields.io/badge/arXiv-2606.05878-b31b1b.svg" data-lightbox="image-set">
-<img alt="arXiv" src="https://img.shields.io/badge/arXiv-2606.05878-b31b1b.svg" /></a>
+  <section id="quickstart">
+<h1>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">#</a></h1>
+<p><strong>Paper:</strong> <a class="reference external" href="https://arxiv.org/abs/2606.05878">TS-ICL: A Flexible Time-Indexed Foundation Model for Time
+Series via In-Context Learning</a></p>
+<p><strong>TS-ICL</strong> is a continuous probabilistic Time Series Foundation Model
+(TSFM) that unifies <strong>forecasting</strong> and <strong>imputation</strong> in a single
+zero-shot architecture, requiring no task-specific training or
+fine-tuning.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/TS-ICL-v1.png"><a href="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/TS-ICL-v1.png" data-lightbox="image-set">
+<img alt="alt" src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/TS-ICL-v1.png" style="width: 70%;" />
 </a>
-<a class="reference external" href="https://pypi.org/project/tsicl"><a href="https://img.shields.io/pypi/v/tsicl.svg" data-lightbox="image-set">
-<img alt="PyPI" src="https://img.shields.io/pypi/v/tsicl.svg" /></a>
 </a>
-<a class="reference external" href="https://github.com/EDF-Lab/ts-icl/actions/workflows/tests.yml"><a href="https://github.com/EDF-Lab/ts-icl/actions/workflows/tests.yml/badge.svg" data-lightbox="image-set">
-<img alt="test" src="https://github.com/EDF-Lab/ts-icl/actions/workflows/tests.yml/badge.svg" /></a>
-</a>
-<a class="reference external" href="https://www.python.org/"><a href="https://img.shields.io/badge/python-%3E%3D3.12-blue.svg" data-lightbox="image-set">
-<img alt="Python" src="https://img.shields.io/badge/python-%3E%3D3.12-blue.svg" /></a>
-</a></p>
-<p><strong>Paper:</strong> <a class="reference external" href="https://arxiv.org/abs/2606.05878">TS-ICL: A Flexible Time-Indexed Foundation Model for Time Series via In-Context Learning</a></p>
-<p><strong>TS-ICL</strong> is a continuous probabilistic Time Series Foundation Model (TSFM) that unifies <strong>forecasting</strong> and <strong>imputation</strong> in a single zero-shot architecture, requiring no task-specific training or fine-tuning.</p>
-<div align="center">
-  <img src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/TS-ICL-v1.png" alt="TS-ICL architecture" width="80%" />
-</div>
+<figcaption>
+<p><span class="caption-text">TS-ICL architecture</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <hr class="docutils" />
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>tsicl
 </pre></div>
 </div>
-<p>Model checkpoint can be found on <a class="reference external" href="https://huggingface.co/taharnbl/TS-ICL">TS-ICL’s Huggingface repo</a>.</p>
+<p>Model checkpoint can be found on <a class="reference external" href="https://huggingface.co/taharnbl/TS-ICL">TS-ICL’s Huggingface
+repo</a>.</p>
 <p><strong>Requirements:</strong> Python ≥ 3.12, PyTorch ≥ 2.5.1</p>
 </section>
 <hr class="docutils" />
@@ -420,7 +416,8 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>Both methods return a <code class="docutils literal notranslate"><span class="pre">(point_prediction,</span> <span class="pre">quantile_predictions)</span></code> tuple. <strong>NaN values are handled natively</strong> — no preprocessing required.</p>
+<p>Both methods return a <code class="docutils literal notranslate"><span class="pre">(point_prediction,</span> <span class="pre">quantile_predictions)</span></code>
+tuple. <strong>NaN values are handled natively</strong> — no preprocessing required.</p>
 </section>
 <hr class="docutils" />
 <section id="notebooks">
@@ -433,11 +430,18 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="#notebooks/get_started_imputation.ipynb"><span class="xref myst">get_started_imputation.ipynb</span></a></p></td>
-<td><p>Pointwise &amp; block missingness, covariate-aware imputation, output format, batch processing</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="notebooks/get_started_imputation.ipynb">get_st
+arted_imputation.ipynb</a></p></td>
+<td><p>Pointwise &amp; block missingness,
+covariate-aware imputation,
+output format, batch processing</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#notebooks/get_started_forecasting.ipynb"><span class="xref myst">get_started_forecasting.ipynb</span></a></p></td>
-<td><p>Univariate forecasting, partially observed look-back, covariate-aware forecasting, batch processing</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="notebooks/get_started_forecasting.ipynb">get_star
+ted_forecasting.ipynb</a></p></td>
+<td><p>Univariate forecasting, partially
+observed look-back,
+covariate-aware forecasting,
+batch processing</p></td>
 </tr>
 </tbody>
 </table>
@@ -448,49 +452,98 @@
 <h2>Model<a class="headerlink" href="#model" title="Link to this heading">#</a></h2>
 <p>TS-ICL processes each time series through four successive modules:</p>
 <ol class="arabic simple">
-<li><p><strong>Time Series Encoder</strong> — a Perceiver-like architecture that compresses observed (timestamp, value) pairs into M = 32 learnable latent tokens via cross-attention. Accepts inputs of <strong>arbitrary length</strong> without preprocessing.</p></li>
-<li><p><strong>Channel Mixer</strong> — aggregates information across channels via cross-attention. Selectively integrates covariate representations into the target’s representation when covariates are provided.</p></li>
-<li><p><strong>Temporal Context Query Module</strong> — maps any query timestamp to a context-aware embedding using Fourier (NeRF-style) positional encoding. Enables prediction at arbitrary timestamps, including on <strong>irregular grids</strong>.</p></li>
-<li><p><strong>In-Context Regressor</strong> — a causal Transformer that reads observed (representation, value) pairs as in-context training examples and outputs <strong>99 quantiles</strong> at the queried timestamps.</p></li>
+<li><p><strong>Time Series Encoder</strong> — a Perceiver-like architecture that
+compresses observed (timestamp, value) pairs into M = 32 learnable
+latent tokens via cross-attention. Accepts inputs of <strong>arbitrary
+length</strong> without preprocessing.</p></li>
+<li><p><strong>Channel Mixer</strong> — aggregates information across channels via
+cross-attention. Selectively integrates covariate representations
+into the target’s representation when covariates are provided.</p></li>
+<li><p><strong>Temporal Context Query Module</strong> — maps any query timestamp to a
+context-aware embedding using Fourier (NeRF-style) positional
+encoding. Enables prediction at arbitrary timestamps, including on
+<strong>irregular grids</strong>.</p></li>
+<li><p><strong>In-Context Regressor</strong> — a causal Transformer that reads observed
+(representation, value) pairs as in-context training examples and
+outputs <strong>99 quantiles</strong> at the queried timestamps.</p></li>
 </ol>
-<p>A single checkpoint (<code class="docutils literal notranslate"><span class="pre">tsicl-v1.ckpt</span></code>) contains two specialised components — one trained with masking for imputation, one with causal masking for forecasting — sharing the same architecture backbone.</p>
+<p>A single checkpoint (<code class="docutils literal notranslate"><span class="pre">tsicl-v1.ckpt</span></code>) contains two specialised
+components — one trained with masking for imputation, one with causal
+masking for forecasting — sharing the same architecture backbone.</p>
 </section>
 <hr class="docutils" />
 <section id="performance">
 <h2>Performance<a class="headerlink" href="#performance" title="Link to this heading">#</a></h2>
 <section id="forecasting-fev-bench">
 <h3>Forecasting — <code class="docutils literal notranslate"><span class="pre">fev-bench</span></code><a class="headerlink" href="#forecasting-fev-bench" title="Link to this heading">#</a></h3>
-<p>TS-ICL is highly competitive with the best forecasting foundation models, while being <strong>fast</strong> at inference. TS-ICL  <strong>efficently leverages covariate</strong> (when relevant) and is also <strong>robust to sparse look-back windows</strong>.</p>
-<div align="center">
-  <img src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/fevbench.png" alt="fev-bench results" width="80%" />
-</div>
+<p>TS-ICL is highly competitive with the best forecasting foundation
+models, while being <strong>fast</strong> at inference. TS-ICL <strong>efficently leverages
+covariate</strong> (when relevant) and is also <strong>robust to sparse look-back
+windows</strong>.</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/fevbench.png"><a href="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/fevbench.png" data-lightbox="image-set">
+<img alt="alt" src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/fevbench.png" style="width: 80%;" />
+</a>
+</a>
+<figcaption>
+<p><span class="caption-text">fev-bench results</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p><em>Example — pointwise forecast with a known covariate (GFC17 dataset):</em></p>
-<div align="center">
-  <img src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/forecast-GFC17-covar.png" alt="Forecast with covariate example" width="80%" />
-</div>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/forecast-GFC17-covar.png"><a href="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/forecast-GFC17-covar.png" data-lightbox="image-set">
+<img alt="alt" src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/forecast-GFC17-covar.png" style="width: 80%;" />
+</a>
+</a>
+<figcaption>
+<p><span class="caption-text">Forecast with covariate example</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="forecasting-time-benchmark">
 <h3>Forecasting — <code class="docutils literal notranslate"><span class="pre">TIME</span> <span class="pre">benchmark</span></code><a class="headerlink" href="#forecasting-time-benchmark" title="Link to this heading">#</a></h3>
-<div align="center">
-  <img src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/Time-Benchmark.png" alt="TIME benchmark results" width="60%" />
-</div>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/Time-Benchmark.png"><a href="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/Time-Benchmark.png" data-lightbox="image-set">
+<img alt="alt" src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/Time-Benchmark.png" style="width: 60%;" />
+</a>
+</a>
+<figcaption>
+<p><span class="caption-text">TIME benchmark results</span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="imputation-fm-impute-bench">
 <h3>Imputation — <code class="docutils literal notranslate"><span class="pre">fm-impute-bench</span></code><a class="headerlink" href="#imputation-fm-impute-bench" title="Link to this heading">#</a></h3>
-<p>TS-ICL achieves <strong>state-of-the-art imputation</strong> across 132 univariate and 24 covariate-aware tasks, outperforming the best tabular foundation model baseline while being <strong>~50× faster</strong> at inference.</p>
-<div align="center">
-  <img src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/fm-impute-bench.png" alt="fm-impute-bench results" width="80%" />
-</div>
-<p><em>Example — block imputation with uncertainty quantification (COVID-19 energy dataset):</em></p>
-<div align="center">
-  <img src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/impute-covid19-energy.png" alt="Block imputation with uncertainty quantification example" width="80%" />
-</div>
+<p>TS-ICL achieves <strong>state-of-the-art imputation</strong> across 132 univariate
+and 24 covariate-aware tasks, outperforming the best tabular foundation
+model baseline while being <strong>~50× faster</strong> at inference.</p>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/fm-impute-bench.png"><a href="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/fm-impute-bench.png" data-lightbox="image-set">
+<img alt="alt" src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/fm-impute-bench.png" style="width: 80%;" />
+</a>
+</a>
+<figcaption>
+<p><span class="caption-text">fm-impute-bench results</span><a class="headerlink" href="#id5" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><em>Example — block imputation with uncertainty quantification (COVID-19
+energy dataset):</em></p>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/impute-covid19-energy.png"><a href="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/impute-covid19-energy.png" data-lightbox="image-set">
+<img alt="alt" src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/impute-covid19-energy.png" style="width: 80%;" />
+</a>
+</a>
+<figcaption>
+<p><span class="caption-text">Block imputation with uncertainty quantification example</span><a class="headerlink" href="#id6" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 </section>
 <hr class="docutils" />
 <section id="citation">
 <h2>Citation<a class="headerlink" href="#citation" title="Link to this heading">#</a></h2>
-<p>If you use TS-ICL for research purposes, please consider citing the associated paper:</p>
+<p>If you use TS-ICL for research purposes, please consider citing the
+associated paper:</p>
 <div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">lenaour2026tsicl</span><span class="p">,</span>
 <span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{TS-ICL: A Flexible Time-Indexed Foundation Model for Time Series via In-Context Learning}</span><span class="p">,</span>
 <span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{Le Naour, Etienne and Nabil, Tahar and Petralia, Adrien}</span><span class="p">,</span>
@@ -513,7 +566,8 @@
 <hr class="docutils" />
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
-<p>TS-ICL weights and code are released under a non-commercial license, see <a class="reference internal" href="#LICENSE"><span class="xref myst">LICENSE</span></a>.</p>
+<p>TS-ICL weights and code are released under a non-commercial license, see
+<a class="reference external" href="LICENSE">LICENSE</a>.</p>
 </section>
 <section id="contact">
 <h2>Contact<a class="headerlink" href="#contact" title="Link to this heading">#</a></h2>
