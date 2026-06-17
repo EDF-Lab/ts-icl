@@ -34,7 +34,7 @@ jobs:
         run: uv python install ${{ matrix.python-version }}
 
       - name: Install package with docs dependencies
-        run: uv sync --group dev --all-packages
+        run: uv sync --extra dev --all-packages
 
       - name: Run test suite
         run: uv run pytest tests/ --tb=short -q
