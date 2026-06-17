@@ -404,7 +404,7 @@
 <section id="Imports">
 <h3>Imports<a class="headerlink" href="#Imports" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -412,20 +412,8 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
-<span class="c1"># TS-ICL — try installed package first, fall back to source</span>
-<span class="c1"># try:</span>
-<span class="c1">#     from tsicl import TSICL</span>
-<span class="c1">#     from tsicl.plot.imputation import plot_sample_imputation</span>
-<span class="c1"># except ImportError:</span>
-<span class="c1">#     import sys, os</span>
-<span class="c1">#     sys.path.insert(0, os.path.join(os.getcwd(), &quot;../..&quot;))</span>
-<span class="c1">#     from src.tsicl.pipeline import TSICL</span>
-<span class="c1">#     from src.tsicl.plot.imputation import plot_sample_imputation</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;../&quot;</span><span class="p">))</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">src.tsicl.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">TSICL</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">src.tsicl.plot.imputation</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_sample_imputation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tsicl.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">TSICL</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tsicl.plot.imputation</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_sample_imputation</span>
 
 <span class="c1"># Reproducibility</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
@@ -436,21 +424,16 @@
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/fssmall/home/b73081/projects/ts-icl-old/.venv/lib/python3.13/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-PyTorch 2.9.1+cu128  |  device: cpu
+<span class="ansi-red-intense-fg ansi-bold">Running cells with &#39;.venv (Python 3.12.7)&#39; requires the ipykernel package.
+
+</span><span class="ansi-red-intense-fg ansi-bold">Install &#39;ipykernel&#39; into the Python environment.
+
+</span><span class="ansi-red-intense-fg ansi-bold">Command: &#39;/home/a00775/code/run/ts-icl/.venv/bin/python -m pip install ipykernel -U --force-reinstall&#39;</span>
 </pre></div></div>
 </div>
 </section>
@@ -1292,7 +1275,7 @@ observations where available.</p></td>
 <li><p><strong>Inference speed:</strong> ~6.5 ms per window on an H100 GPU — roughly <strong>50× faster</strong> than Tabular Foundation Models (Table 2 in the paper).</p></li>
 </ul>
 <hr class="docutils" />
-<p>This notebook only scratches the surface — TS-ICL’s imputation capabilities go well beyond what’s shown here. The best way to discover them is to read the <a class="reference external" href="https://github.com/EDFLab/tsicl">documentation to update xxx</a> and experiment with your own data!</p>
+<p>This notebook only scratches the surface — TS-ICL’s imputation capabilities go well beyond what’s shown here. The best way to discover them is to read the <a class="reference external" href="https://edf-lab.github.io/ts-icl/autoapi/tsicl/pipeline/index.html">documentation</a> and experiment with your own data!</p>
 </section>
 </section>
 
