@@ -401,8 +401,8 @@
 <li><p><strong>~40× faster</strong> at inference than tabular foundation models — 15.4 ms per window on an H100 GPU</p></li>
 <li><p>Particularly <strong>robust to missing look-back data</strong></p></li>
 </ul>
-<div align="center"><p><a href="docs/contents/fevbench.png" data-lightbox="image-set">
-<img alt="TS-ICL architecture" class="no-scaled-link" src="docs/contents/fevbench.png" style="width: 75%;" /></a>
+<div align="center"><p><a href="../_images/fevbench.png" data-lightbox="image-set">
+<img alt="TS-ICL architecture" class="no-scaled-link" src="../_images/fevbench.png" style="width: 75%;" /></a>
 </p>
 </div><section id="Installation">
 <h3>Installation<a class="headerlink" href="#Installation" title="Link to this heading">#</a></h3>
@@ -509,8 +509,8 @@ PyTorch 2.9.1  |  device: cpu
 <li><p><strong>Temporal Context Query Module</strong> <code class="docutils literal notranslate"><span class="pre">𝓅</span></code> — maps any query timestamp to a context-aware embedding using Fourier (NeRF-style) positional encoding + cross-attention. Querying at arbitrary timestamps is what makes the model naturally handle irregular grids.</p></li>
 <li><p><strong>In-Context Regressor</strong> <code class="docutils literal notranslate"><span class="pre">𝒫</span></code> — a causal Transformer that reads the observed (representation, value) pairs as “in-context training examples” and predicts quantiles at the future positions using causal self-attention.</p></li>
 </ol>
-<div align="center"><p><a href="docs/contents/TS-ICL-v1.png" data-lightbox="image-set">
-<img alt="TS-ICL architecture" class="no-scaled-link" src="docs/contents/TS-ICL-v1.png" style="width: 70%;" /></a>
+<div align="center"><p><a href="../_images/TS-ICL-v1.png" data-lightbox="image-set">
+<img alt="TS-ICL architecture" class="no-scaled-link" src="../_images/TS-ICL-v1.png" style="width: 70%;" /></a>
 </p>
 </div></details></section>
 </section>
