@@ -15,6 +15,6 @@ for nb in docs/src/*.ipynb; do
 done
 
 # Copy readme in docs
-cp README.md docs/readme.md
+cp README.md docs/src/readme.md
 
 echo "Copy and update figure paths of doc notebooks done."

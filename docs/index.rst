@@ -7,7 +7,20 @@
 TS-ICL : A Flexible Time-Indexed Foundation Model for Time Series via In-Context Learning
 ======================================================================================
 
-|arXiv| |PyPI| |Python|
+.. |arXiv| image:: https://img.shields.io/badge/arXiv-2606.05878-b31b1b.svg
+   :target: https://arxiv.org/abs/2606.05878
+
+.. |PyPI| image:: https://img.shields.io/pypi/v/tsicl.svg
+   :target: https://pypi.org/project/tsicl
+
+.. |test| image:: https://github.com/EDF-Lab/ts-icl/actions/workflows/tests.yml/badge.svg
+   :target: https://github.com/EDF-Lab/ts-icl/actions/workflows/tests.yml
+
+.. |Python| image:: https://img.shields.io/badge/python-%3E%3D3.12-blue.svg
+   :target: https://www.python.org/
+
+
+|arXiv| |PyPI| |test| |Python|
 
 TS-ICL is a continuous probabilistic Time Series Foundation Model (TSFM) that unifies forecasting and imputation in a single zero-shot architecture, requiring no task-specific training or fine-tuning.
 
@@ -15,7 +28,7 @@ TS-ICL is a continuous probabilistic Time Series Foundation Model (TSFM) that un
     :maxdepth: 1 
     :hidden:
 
-    Quickstart <readme>
+    Quickstart <src/readme>
     Forecasting <pages/01_get_started_forecasting>
     Imputation <pages/02_get_started_imputation>
     API Reference </autoapi/index.rst>
