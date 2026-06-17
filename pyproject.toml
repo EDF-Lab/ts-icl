@@ -28,7 +28,7 @@ dependencies = [
     "torch>=2.5.1,<2.10",
 ]
 
-[dependency-groups]
+[project.optional-dependencies]
 dev = [
     "pytest>=8.0",
     "pytest-cov>=5.0",
