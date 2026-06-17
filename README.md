@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="docs/contents/logo-tsicl.jpeg" alt="TS-ICL architecture" width="30%" />
+  <img src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/logo-tsicl.jpeg" alt="TS-ICL architecture" width="30%" />
 </div>
 
 # TS-ICL: a Time-Indexed Foundation Model for Time Series Forecasting & Imputation via In-Context Learning
@@ -7,15 +7,14 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2606.05878-b31b1b.svg)](https://arxiv.org/abs/2606.05878)
 [![PyPI](https://img.shields.io/pypi/v/tsicl.svg)](https://pypi.org/project/tsicl)
-[![test](https://github.com/EDF-Lab/ts-icl/actions/workflows/tests.yml/badge.svg)](https://github.com/EDF-Lab/ts-icl/actions/workflows/tests.yml)
-[![Python](https://img.shields.io/badge/python-%3E%3D3.10-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/python-%3E%3D3.12-blue.svg)](https://www.python.org/)
 
 **Paper:** [TS-ICL: A Flexible Time-Indexed Foundation Model for Time Series via In-Context Learning](https://arxiv.org/abs/2606.05878)
 
 **TS-ICL** is a continuous probabilistic Time Series Foundation Model (TSFM) that unifies **forecasting** and **imputation** in a single zero-shot architecture, requiring no task-specific training or fine-tuning.
 
 <div align="center">
-  <img src="docs/contents/TS-ICL-v1.png" alt="TS-ICL architecture" width="80%" />
+  <img src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/TS-ICL-v1.png" alt="TS-ICL architecture" width="80%" />
 </div>
 
 ---
@@ -28,7 +27,7 @@ pip install tsicl
 
 Model checkpoint can be found on [TS-ICL's Huggingface repo](https://huggingface.co/taharnbl/TS-ICL).
 
-**Requirements:** Python ≥ 3.10, PyTorch ≥ 2.5.1
+**Requirements:** Python ≥ 3.12, PyTorch ≥ 2.5.1
 
 ---
 
@@ -90,19 +89,19 @@ A single checkpoint (`tsicl-v1.ckpt`) contains two specialised components — on
 TS-ICL is highly competitive with the best forecasting foundation models, while being **fast** at inference. TS-ICL  **efficently leverages covariate** (when relevant) and is also **robust to sparse look-back windows**.
 
 <div align="center">
-  <img src="docs/contents/fevbench.png" alt="fev-bench results" width="80%" />
+  <img src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/fevbench.png" alt="fev-bench results" width="80%" />
 </div>
 
 *Example — pointwise forecast with a known covariate (GFC17 dataset):*
 
 <div align="center">
-  <img src="docs/contents/forecast-GFC17-covar.png" alt="Forecast with covariate example" width="80%" />
+  <img src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/forecast-GFC17-covar.png" alt="Forecast with covariate example" width="80%" />
 </div>
 
 ### Forecasting — `TIME benchmark`
 
 <div align="center">
-  <img src="docs/contents/Time-Benchmark.png" alt="TIME benchmark results" width="60%" />
+  <img src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/Time-Benchmark.png" alt="TIME benchmark results" width="60%" />
 </div>
 
 ### Imputation — `fm-impute-bench`
@@ -110,13 +109,13 @@ TS-ICL is highly competitive with the best forecasting foundation models, while 
 TS-ICL achieves **state-of-the-art imputation** across 132 univariate and 24 covariate-aware tasks, outperforming the best tabular foundation model baseline while being **~50× faster** at inference.
 
 <div align="center">
-  <img src="docs/contents/fm-impute-bench.png" alt="fm-impute-bench results" width="80%" />
+  <img src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/fm-impute-bench.png" alt="fm-impute-bench results" width="80%" />
 </div>
 
 *Example — block imputation with uncertainty quantification (COVID-19 energy dataset):*
 
 <div align="center">
-  <img src="docs/contents/impute-covid19-energy.png" alt="Block imputation with uncertainty quantification example" width="80%" />
+  <img src="https://raw.githubusercontent.com/EDF-Lab/ts-icl/main/docs/contents/impute-covid19-energy.png" alt="Block imputation with uncertainty quantification example" width="80%" />
 </div>
 
 ---
