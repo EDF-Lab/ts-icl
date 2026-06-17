@@ -7,6 +7,7 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2606.05878-b31b1b.svg)](https://arxiv.org/abs/2606.05878)
 [![PyPI](https://img.shields.io/pypi/v/tsicl.svg)](https://pypi.org/project/tsicl)
+[![test](https://github.com/EDF-Lab/ts-icl/actions/workflows/tests.yml/badge.svg)](https://github.com/EDF-Lab/ts-icl/actions/workflows/tests.yml)
 [![Python](https://img.shields.io/badge/python-%3E%3D3.12-blue.svg)](https://www.python.org/)
 
 **Paper:** [TS-ICL: A Flexible Time-Indexed Foundation Model for Time Series via In-Context Learning](https://arxiv.org/abs/2606.05878)
