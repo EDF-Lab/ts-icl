@@ -401,8 +401,8 @@
 <li><p><strong>~40× faster</strong> at inference than tabular foundation models — 15.4 ms per window on an H100 GPU</p></li>
 <li><p>Particularly <strong>robust to missing look-back data</strong></p></li>
 </ul>
-<div align="center"><p><a href="../_images/fevbench.png" data-lightbox="image-set">
-<img alt="TS-ICL architecture" class="no-scaled-link" src="../_images/fevbench.png" style="width: 75%;" /></a>
+<div align="center"><p><a href="docs/contents/fevbench.png" data-lightbox="image-set">
+<img alt="TS-ICL architecture" class="no-scaled-link" src="docs/contents/fevbench.png" style="width: 75%;" /></a>
 </p>
 </div><section id="Installation">
 <h3>Installation<a class="headerlink" href="#Installation" title="Link to this heading">#</a></h3>
@@ -419,13 +419,16 @@
 <section id="Imports">
 <h3>Imports<a class="headerlink" href="#Imports" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;../&quot;</span><span class="p">))</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">tsicl.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">TSICL</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tsicl.plot.forecasting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_sample_forecast</span>
@@ -444,13 +447,13 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-PyTorch 2.9.1+cu128  |  device: cpu
+PyTorch 2.9.1  |  device: cpu
 </pre></div></div>
 </div>
 </section>
 <section id="Loading-the-Model">
 <h3>Loading the Model<a class="headerlink" href="#Loading-the-Model" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">tsicl-v1.ckpt</span></code> file contains two specialised TS-ICL checkpoints that share the same architecture but were trained on different tasks: one for imputation and the other for forecasting.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">tsicl-v1.ckpt</span></code> file contains two specialised TS-ICL checkpoints that share the same architecture but were trained on different tasks: one for imputation and the other for forecasting. You can find the checkpoint in the <a class="reference external" href="https://huggingface.co/taharnbl/TS-ICL/tree/main">TS-ICL Hugging Face repository</a>.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Checkpoint</p></th>
@@ -472,7 +475,7 @@ PyTorch 2.9.1+cu128  |  device: cpu
 </div>
 <p>Set <code class="docutils literal notranslate"><span class="pre">MODEL_PATH</span></code> to your downloaded checkpoint, or enable <code class="docutils literal notranslate"><span class="pre">allow_auto_download=True</span></code> for automatic fetching.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Update this path to your local checkpoint ─────────────────────────────</span>
@@ -506,8 +509,8 @@ PyTorch 2.9.1+cu128  |  device: cpu
 <li><p><strong>Temporal Context Query Module</strong> <code class="docutils literal notranslate"><span class="pre">𝓅</span></code> — maps any query timestamp to a context-aware embedding using Fourier (NeRF-style) positional encoding + cross-attention. Querying at arbitrary timestamps is what makes the model naturally handle irregular grids.</p></li>
 <li><p><strong>In-Context Regressor</strong> <code class="docutils literal notranslate"><span class="pre">𝒫</span></code> — a causal Transformer that reads the observed (representation, value) pairs as “in-context training examples” and predicts quantiles at the future positions using causal self-attention.</p></li>
 </ol>
-<div align="center"><p><a href="../_images/TS-ICL-v1.png" data-lightbox="image-set">
-<img alt="TS-ICL architecture" class="no-scaled-link" src="../_images/TS-ICL-v1.png" style="width: 70%;" /></a>
+<div align="center"><p><a href="docs/contents/TS-ICL-v1.png" data-lightbox="image-set">
+<img alt="TS-ICL architecture" class="no-scaled-link" src="docs/contents/TS-ICL-v1.png" style="width: 70%;" /></a>
 </p>
 </div></details></section>
 </section>
@@ -549,7 +552,7 @@ PyTorch 2.9.1+cu128  |  device: cpu
 </ul>
 <p>The two components are added to form the target <code class="docutils literal notranslate"><span class="pre">signal</span></code>. Keeping them separate lets us later use <code class="docutils literal notranslate"><span class="pre">weekly_pattern</span></code> as a covariate — a clean analogue of real-world scenarios where a low-frequency exogenous driver (temperature, irradiance) is continuously observed.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.gaussian_process</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianProcessRegressor</span>
@@ -602,7 +605,7 @@ PyTorch 2.9.1+cu128  |  device: cpu
 <h2>1.1 Univariate Forecasting<a class="headerlink" href="#1.1-Univariate-Forecasting" title="Link to this heading">#</a></h2>
 <p>We use the first 900 timesteps as the look-back context and ask the model to predict the next 100 — a ~4-day horizon for an hourly signal.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">context</span> <span class="o">=</span> <span class="mi">900</span>
@@ -647,7 +650,7 @@ Quantile prediction shape: (100, 13)
 <p>where <code class="docutils literal notranslate"><span class="pre">N</span></code> = batch size, <code class="docutils literal notranslate"><span class="pre">C</span></code> = number of channels (1 for univariate), <code class="docutils literal notranslate"><span class="pre">H</span></code> = <code class="docutils literal notranslate"><span class="pre">prediction_length</span></code>, <code class="docutils literal notranslate"><span class="pre">Q</span></code> = number of quantile levels.</p>
 <p><code class="docutils literal notranslate"><span class="pre">plot_sample_forecast</span></code> is included in the TS-ICL package. It displays the context window, the ground truth horizon, the median prediction, and the requested IQR bands.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_sample_forecast</span><span class="p">(</span>
@@ -679,7 +682,7 @@ Quantile prediction shape: (100, 13)
 <p>Patch-based foundation models divide the context into fixed-size windows and cannot handle <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values natively. TS-ICL’s time-indexed encoder processes only the observed (timestamp, value) pairs, making it inherently robust to missing history — a common occurrence due to sensor outages, transmission failures, or irregular sampling.</p>
 <p>Here we randomly drop 30% of the look-back observations and show that forecasting quality degrades only marginally.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Create partially observed look-back ───────────────────────────────</span>
@@ -764,7 +767,7 @@ Missing in look-back: 275 / 900  (31%)
 <p>In each case the covariate is <strong>known over the forecast horizon</strong> — wind and irradiance forecasts are available days ahead, temperature is closely tied to calendar season.</p>
 <p>Our <code class="docutils literal notranslate"><span class="pre">signal</span></code> is the sum of <code class="docutils literal notranslate"><span class="pre">daily_pattern</span></code> and <code class="docutils literal notranslate"><span class="pre">weekly_pattern</span></code>. When forecasting a 100-point horizon, the model must extrapolate the weekly phase beyond what it has seen in the context. Supplying <code class="docutils literal notranslate"><span class="pre">weekly_pattern</span></code> as a <strong>fully-observed covariate</strong> — over the full 1 000 timesteps including the horizon — gives the model an exact anchor for the low-frequency component, so it can focus on predicting the daily fluctuations.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Inference WITH covariate ───────────────────────────────────────────────</span>
@@ -808,7 +811,7 @@ Missing in look-back: 275 / 900  (31%)
 </div>
 <hr class="docutils" />
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Inference WITH past-only covariate ───────────────────────────────────────────────</span>
@@ -859,7 +862,7 @@ Missing in look-back: 275 / 900  (31%)
 <li><p><strong>Mean WQL</strong> (↓) — Weighted Quantile Loss across all quantile levels, assessing both calibration and sharpness</p></li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q_idx</span> <span class="o">=</span> <span class="p">{</span><span class="n">q</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">q</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">quantile_levels</span><span class="p">)}</span>
@@ -895,7 +898,7 @@ Missing in look-back: 275 / 900  (31%)
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mae_no</span>      <span class="o">=</span> <span class="n">horizon_mae</span><span class="p">(</span><span class="n">pred_quantiles</span><span class="p">)</span>
@@ -957,7 +960,7 @@ Mean WQL (↓)                   0.2516             0.1950 ✅                 0
 <section id="Quantile-indexing-and-calibration-check">
 <h2>Quantile indexing and calibration check<a class="headerlink" href="#Quantile-indexing-and-calibration-check" title="Link to this heading">#</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Inspect output from section 1.1 ───────────────────────────────────────────</span>
@@ -993,7 +996,7 @@ Quantile levels and column indices:
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Calibration check at the forecast horizon ──────────────────────────────────</span>
@@ -1039,7 +1042,7 @@ Coverage close to the nominal level indicates well-calibrated predictions.
 <div><p><strong>Variable-length series:</strong> if your series have different context lengths, pass a <em>list</em> of <code class="docutils literal notranslate"><span class="pre">[C_i,</span> <span class="pre">1]</span></code> tensors instead of a stacked tensor. The model handles variable lengths natively.</p>
 </div></blockquote>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span>         <span class="o">=</span> <span class="mi">8</span>
@@ -1079,7 +1082,7 @@ Batch output shape: (8, 100, 13)  →  8 series × 100 timesteps × 13 quantiles
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Plot the first series in the batch ─────────────────────────────────────────</span>
