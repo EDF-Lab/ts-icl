@@ -36,8 +36,8 @@ jobs:
   
       - name: Run notebook preparation script (path fix)
         run: |
-          chmod +x docs/src/copy_and_update_nbs.sh
-          ./docs/src/copy_and_update_nbs.sh
+          chmod +x docs/src/prepare_ressources.sh
+          ./docs/src/prepare_ressources.sh
    
       - name: Build HTML documentation
         run: uv run sphinx-build -b html docs docs/build/html
