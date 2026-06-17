@@ -419,7 +419,7 @@
 <section id="Imports">
 <h3>Imports<a class="headerlink" href="#Imports" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -434,13 +434,13 @@
 <span class="c1"># except ImportError:</span>
 <span class="c1">#     import sys, os</span>
 <span class="c1">#     sys.path.insert(0, os.path.join(os.getcwd(), &quot;../..&quot;))</span>
-<span class="c1">#     from tsicl.pipeline import TSICL</span>
-<span class="c1">#     from tsicl.plot.imputation import plot_sample_imputation</span>
+<span class="c1">#     from src.tsicl.pipeline import TSICL</span>
+<span class="c1">#     from src.tsicl.plot.imputation import plot_sample_imputation</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;../&quot;</span><span class="p">))</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">tsicl.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">TSICL</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">tsicl.plot.forecasting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_sample_forecast</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.tsicl.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">TSICL</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.tsicl.plot.forecasting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_sample_forecast</span>
 
 <span class="c1"># Reproducibility</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
@@ -1273,7 +1273,7 @@ extended context for the target time series.</p></td>
 <li><p><strong>Inference speed:</strong> ~15.4 ms per window on an H100 GPU.</p></li>
 </ul>
 <hr class="docutils" />
-<p>This notebook only scratches the surface — TS-ICL’s forecasting capabilities go well beyond what’s shown here. The best way to discover them is to read the <a class="reference external" href="https://edf-lab.github.io/ts-icl/">documentation</a> and experiment with your own data!</p>
+<p>This notebook only scratches the surface — TS-ICL’s forecasting capabilities go well beyond what’s shown here. The best way to discover them is to read the <a class="reference external" href="https://github.com/EDFLab/tsicl">documentation xxx to do xxx</a> and experiment with your own data!</p>
 </section>
 </section>
 
