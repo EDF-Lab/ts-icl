@@ -76,7 +76,7 @@ TS-ICL is a continuous probabilistic Time Series Foundation Model (TSFM) that un
 
         +++
 
-        .. button-ref:: /src/0_quickstart.rst
+        .. button-ref:: /src/readme
             :expand:
             :color: secondary
             :click-parent:
