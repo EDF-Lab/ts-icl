@@ -204,7 +204,7 @@ License
 -------
 
 TS-ICL weights and code are released under a non-commercial license, see
-`LICENSE <LICENSE>`__.
+`LICENSE <https://github.com/EDF-Lab/ts-icl/blob/main/LICENSE>`__.
 
 Contact
 -------
