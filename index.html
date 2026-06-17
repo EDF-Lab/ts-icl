@@ -59,7 +59,7 @@
     <link rel="icon" href="_static/logo-tsicl.jpeg"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Quickstart" href="src/0_quickstart.html" />
+    <link rel="next" title="Getting Started with TS-ICL — Forecasting" href="pages/01_get_started_forecasting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -150,13 +150,6 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="src/0_quickstart.html">
-    Quickstart
-  </a>
-</li>
-
-
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="pages/01_get_started_forecasting.html">
     Forecasting
@@ -256,13 +249,6 @@
   <ul class="bd-navbar-elements navbar-nav">
     
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="src/0_quickstart.html">
-    Quickstart
-  </a>
-</li>
-
-
-<li class="nav-item ">
   <a class="nav-link nav-internal" href="pages/01_get_started_forecasting.html">
     Forecasting
   </a>
@@ -341,13 +327,7 @@
                   
   <section id="ts-icl-a-flexible-time-indexed-foundation-model-for-time-series-via-in-context-learning">
 <h1>TS-ICL : A Flexible Time-Indexed Foundation Model for Time Series via In-Context Learning<a class="headerlink" href="#ts-icl-a-flexible-time-indexed-foundation-model-for-time-series-via-in-context-learning" title="Link to this heading">#</a></h1>
-<p><a class="reference external" href="https://arxiv.org/abs/2606.05878"><a href="https://img.shields.io/badge/arXiv-2606.05878-b31b1b.svg" data-lightbox="image-set">
-<img alt="arXiv" src="https://img.shields.io/badge/arXiv-2606.05878-b31b1b.svg" /></a>
-</a> <a class="reference external" href="https://pypi.org/project/tsicl"><a href="https://img.shields.io/pypi/v/tsicl.svg" data-lightbox="image-set">
-<img alt="PyPI" src="https://img.shields.io/pypi/v/tsicl.svg" /></a>
-</a> <a class="reference external" href="https://www.python.org/"><a href="https://img.shields.io/badge/python-%3E%3D3.12-blue.svg" data-lightbox="image-set">
-<img alt="Python" src="https://img.shields.io/badge/python-%3E%3D3.12-blue.svg" /></a>
-</a></p>
+<p><a href="#id1"><span class="problematic" id="id2">|arXiv|</span></a> <a href="#id3"><span class="problematic" id="id4">|PyPI|</span></a> <a href="#id5"><span class="problematic" id="id6">|Python|</span></a></p>
 <p>TS-ICL is a continuous probabilistic Time Series Foundation Model (TSFM) that unifies forecasting and imputation in a single zero-shot architecture, requiring no task-specific training or fine-tuning.</p>
 <div class="toctree-wrapper compound">
 </div>
@@ -386,7 +366,7 @@
 <p class="sd-card-text">Check out the TS-ICL on-boarding guide.</p>
 </div>
 <div class="sd-card-footer docutils">
-<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="src/0_quickstart.html"><span class="std std-ref">To the main quickstart</span></a></span></p>
+<p class="sd-card-text"><span class="sd-d-grid"><span class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link">To the main quickstart</span></span></p>
 </div>
 </div>
 </div>
@@ -441,179 +421,8 @@ modules, and objects included in TS-ICL.</p>
 </div>
 </div>
 </div>
-<section id="quickstart">
-<h2>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">#</a></h2>
-<p><strong>Paper:</strong> <a class="reference external" href="https://arxiv.org/abs/2606.05878">TS-ICL: A Flexible Time-Indexed Foundation Model for Time
+<br><p><strong>Paper:</strong> <a class="reference external" href="https://arxiv.org/abs/2606.05878">TS-ICL: A Flexible Time-Indexed Foundation Model for Time
 Series via In-Context Learning</a></p>
-<p><strong>TS-ICL</strong> is a continuous probabilistic Time Series Foundation Model
-(TSFM) that unifies <strong>forecasting</strong> and <strong>imputation</strong> in a single
-zero-shot architecture, requiring no task-specific training or
-fine-tuning.</p>
-<a class="reference internal image-reference" href="_images/TS-ICL-v1.png"><a href="_images/TS-ICL-v1.png" data-lightbox="image-set">
-<img alt="alt" class="align-center" src="_images/TS-ICL-v1.png" style="width: 70%;" />
-</a>
-</a>
-<section id="installation">
-<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>tsicl
-</pre></div>
-</div>
-<p><strong>Requirements:</strong> Python ≥ 3.12, PyTorch ≥ 2.5.1</p>
-</section>
-<section id="usage">
-<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tsicl</span><span class="w"> </span><span class="kn">import</span> <span class="n">TSICL</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">TSICL</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="s2">&quot;checkpoints/tsicl-v1.ckpt&quot;</span><span class="p">)</span>
-
-<span class="c1"># Forecasting — predict the next 96 timesteps</span>
-<span class="n">point</span><span class="p">,</span> <span class="n">quantiles</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span>
-    <span class="n">inputs</span>            <span class="o">=</span> <span class="n">my_series</span><span class="p">,</span>        <span class="c1"># e.g. 1-D numpy array or tensor</span>
-    <span class="n">prediction_length</span> <span class="o">=</span> <span class="mi">96</span><span class="p">,</span>
-    <span class="n">quantile_levels</span>   <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
-    <span class="n">denormalize</span>       <span class="o">=</span> <span class="kc">True</span>
-<span class="p">)</span>
-
-<span class="c1"># Imputation — reconstruct NaN values</span>
-<span class="n">point</span><span class="p">,</span> <span class="n">quantiles</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">impute</span><span class="p">(</span>
-    <span class="n">inputs</span>          <span class="o">=</span> <span class="n">my_series_with_nans</span><span class="p">,</span>
-    <span class="n">quantile_levels</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
-    <span class="n">denormalize</span>     <span class="o">=</span> <span class="kc">True</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>Both methods return a <code class="docutils literal notranslate"><span class="pre">(point_prediction,</span> <span class="pre">quantile_predictions)</span></code>
-tuple. <strong>NaN values are handled natively</strong> — no preprocessing required.</p>
-</section>
-<hr class="docutils" />
-<section id="notebooks">
-<h3>Notebooks<a class="headerlink" href="#notebooks" title="Link to this heading">#</a></h3>
-<p>Step-by-step tutorials on synthetic Gaussian Processes:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Notebook</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><a class="reference external" href="pages/02_get_started_imputation">get_started_imputation.ipynb</a></p></td>
-<td><p>Pointwise &amp; block missingness,
-covariate-aware imputation,
-output format, batch processing</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference external" href="pages/01_get_started_forecasting">get_started_forecasting.ipynb</a></p></td>
-<td><p>Univariate forecasting, partially
-observed look-back,
-covariate-aware forecasting,
-batch processing</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<hr class="docutils" />
-<section id="model">
-<h3>Model<a class="headerlink" href="#model" title="Link to this heading">#</a></h3>
-<p>TS-ICL processes each time series through four successive modules:</p>
-<ol class="arabic simple">
-<li><p><strong>Time Series Encoder</strong> — a Perceiver-like architecture that
-compresses observed (timestamp, value) pairs into M = 32 learnable
-latent tokens via cross-attention. Accepts inputs of <strong>arbitrary
-length</strong> without preprocessing.</p></li>
-<li><p><strong>Channel Mixer</strong> — aggregates information across channels via
-cross-attention. Selectively integrates covariate representations
-into the target’s representation when covariates are provided.</p></li>
-<li><p><strong>Temporal Context Query Module</strong> — maps any query timestamp to a
-context-aware embedding using Fourier (NeRF-style) positional
-encoding. Enables prediction at arbitrary timestamps, including on
-<strong>irregular grids</strong>.</p></li>
-<li><p><strong>In-Context Regressor</strong> — a causal Transformer that reads observed
-(representation, value) pairs as in-context training examples and
-outputs <strong>99 quantiles</strong> at the queried timestamps.</p></li>
-</ol>
-<p>A single checkpoint (<code class="docutils literal notranslate"><span class="pre">tsicl-v1.ckpt</span></code>) contains two specialised
-components — one trained with masking for imputation, one with causal
-masking for forecasting — sharing the same architecture backbone.</p>
-</section>
-<hr class="docutils" />
-<section id="performance">
-<h3>Performance<a class="headerlink" href="#performance" title="Link to this heading">#</a></h3>
-<section id="forecasting-fev-bench">
-<h4>Forecasting — <code class="docutils literal notranslate"><span class="pre">fev-bench</span></code><a class="headerlink" href="#forecasting-fev-bench" title="Link to this heading">#</a></h4>
-<p>TS-ICL is highly competitive with the best forecasting foundation
-models, while being <strong>fast</strong> at inference. TS-ICL <strong>efficently leverages
-covariate</strong> (when relevant) and is also <strong>robust to sparse look-back
-windows</strong>.</p>
-<a class="reference internal image-reference" href="_images/fevbench.png"><a href="_images/fevbench.png" data-lightbox="image-set">
-<img alt="alt" class="align-center" src="_images/fevbench.png" style="width: 70%;" />
-</a>
-</a>
-<p><em>Example — pointwise forecast with a known covariate (GFC17 dataset):</em></p>
-<a class="reference internal image-reference" href="_images/forecast-GFC17-covar.png"><a href="_images/forecast-GFC17-covar.png" data-lightbox="image-set">
-<img alt="alt" class="align-center" src="_images/forecast-GFC17-covar.png" style="width: 70%;" />
-</a>
-</a>
-</section>
-<section id="forecasting-time-benchmark">
-<h4>Forecasting — <code class="docutils literal notranslate"><span class="pre">TIME</span> <span class="pre">benchmark</span></code><a class="headerlink" href="#forecasting-time-benchmark" title="Link to this heading">#</a></h4>
-<a class="reference internal image-reference" href="_images/Time-Benchmark.png"><a href="_images/Time-Benchmark.png" data-lightbox="image-set">
-<img alt="alt" class="align-center" src="_images/Time-Benchmark.png" style="width: 70%;" />
-</a>
-</a>
-</section>
-<section id="imputation-fm-impute-bench">
-<h4>Imputation — <code class="docutils literal notranslate"><span class="pre">fm-impute-bench</span></code><a class="headerlink" href="#imputation-fm-impute-bench" title="Link to this heading">#</a></h4>
-<p>TS-ICL achieves <strong>state-of-the-art imputation</strong> across 132 univariate
-and 24 covariate-aware tasks, outperforming the best tabular foundation
-model baseline while being <strong>~50× faster</strong> at inference.</p>
-<a class="reference internal image-reference" href="_images/fm-impute-bench.png"><a href="_images/fm-impute-bench.png" data-lightbox="image-set">
-<img alt="alt" class="align-center" src="_images/fm-impute-bench.png" style="width: 70%;" />
-</a>
-</a>
-<p><em>Example — block imputation with uncertainty quantification (COVID-19
-energy dataset):</em></p>
-<a class="reference internal image-reference" href="_images/impute-covid19-energy.png"><a href="_images/impute-covid19-energy.png" data-lightbox="image-set">
-<img alt="alt" class="align-center" src="_images/impute-covid19-energy.png" style="width: 70%;" />
-</a>
-</a>
-</section>
-</section>
-<hr class="docutils" />
-<section id="citation">
-<h3>Citation<a class="headerlink" href="#citation" title="Link to this heading">#</a></h3>
-<p>If you use TS-ICL for research purposes, please consider citing the
-associated paper:</p>
-<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">lenaour2026tsicl</span><span class="p">,</span>
-<span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{TS-ICL: A Flexible Time-Indexed Foundation Model for Time Series via In-Context Learning}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{Le Naour, Etienne and Nabil, Tahar and Petralia, Adrien}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">journal</span><span class="p">=</span><span class="s">{arXiv preprint arXiv:2606.05878}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">year</span><span class="p">=</span><span class="s">{2026}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="contributors">
-<h3>Contributors<a class="headerlink" href="#contributors" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/EtienneLnr">Etienne Le Naour</a></p></li>
-<li><p><a class="reference external" href="https://github.com/TaharNbl">Tahar Nabil</a></p></li>
-<li><p><a class="reference external" href="https://github.com/adrienpetralia">Adrien Petralia</a></p></li>
-<li><p>Marc Héry (EDF)</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="license">
-<h3>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h3>
-<p>TS-ICL weights and code are released under a non-commercial license, see
-<a class="reference external" href="LICENSE">LICENSE</a>.</p>
-</section>
-<section id="contact">
-<h3>Contact<a class="headerlink" href="#contact" title="Link to this heading">#</a></h3>
-<p>To learn more or request a commercial license, please contact us at:
-tsicl-contact_at_edf.fr (replace <em>at</em> with &#64;).</p>
-</section>
-</section>
 </section>
 
 
@@ -627,11 +436,11 @@ tsicl-contact_at_edf.fr (replace <em>at</em> with &#64;).</p>
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="src/0_quickstart.html"
+       href="pages/01_get_started_forecasting.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Quickstart</p>
+        <p class="prev-next-title">Getting Started with TS-ICL — Forecasting</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
