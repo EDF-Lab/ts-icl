@@ -1,8 +1,3 @@
-.. TS-ICL documentation master file, created by
-   sphinx-quickstart on Thu Jun 11 11:51:40 2026.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 ======================================================================================
 TS-ICL : A Flexible Time-Indexed Foundation Model for Time Series via In-Context Learning
 ======================================================================================
@@ -28,7 +23,7 @@ TS-ICL is a continuous probabilistic Time Series Foundation Model (TSFM) that un
     :maxdepth: 1 
     :hidden:
 
-    Quickstart <src/00_README.rst>
+    Quickstart <README_quickstart>
     Forecasting <pages/01_get_started_forecasting>
     Imputation <pages/02_get_started_imputation>
     API Reference </autoapi/index.rst>
@@ -76,7 +71,7 @@ TS-ICL is a continuous probabilistic Time Series Foundation Model (TSFM) that un
 
         +++
 
-        .. button-ref:: /src/00_README.rst
+        .. button-ref:: README_quickstart
             :expand:
             :color: secondary
             :click-parent:
@@ -144,3 +139,8 @@ TS-ICL is a continuous probabilistic Time Series Foundation Model (TSFM) that un
 
 **Paper:** `TS-ICL: A Flexible Time-Indexed Foundation Model for Time
 Series via In-Context Learning <https://arxiv.org/abs/2606.05878>`__
+
+.. only:: html
+
+   .. include:: README.md
+      :parser: myst_parser.sphinx_
