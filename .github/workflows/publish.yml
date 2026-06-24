@@ -22,7 +22,7 @@ jobs:
         run: uv python install ${{ matrix.python-version }}
 
       - name: Install package with dev dependencies for twine
-        run: uv sync --extra dev
+        run: uv sync --extra dev --extra bench
         
       - name: Build sdist and wheel
         run: uv run python -m build
