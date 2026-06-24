@@ -95,7 +95,8 @@ def plot_sample_forecast(
         quantiles        = (quantiles - mu[..., None]) / (scale[..., None] + 1e-6)
 
         if quantiles_univar is not None:
-            quantiles_univar  = (quantiles_univar - mu[..., None]) / (scale[..., None] + 1e-6)
+            univar_values    = (univar_values - mu) / (scale + 1e-6)
+            quantiles_univar = (quantiles_univar - mu[..., None]) / (scale[..., None] + 1e-6)
 
     if y_true is None:
         y_true = np.nan * np.ones(target_len)
