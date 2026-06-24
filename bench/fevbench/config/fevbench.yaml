@@ -1,0 +1,21 @@
+defaults:
+  - _self_
+  - override hydra/hydra_logging: disabled
+  - override hydra/job_logging: disabled
+
+hydra:  
+  output_subdir: null  
+  run:  
+    dir: .
+
+num_tasks: null
+batch_size: 64
+quantiles: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+context_length: 4096
+
+to_univariate: True
+use_covariates: False
+use_static_covariates: False
+past_only: False
+
+seed: 42
