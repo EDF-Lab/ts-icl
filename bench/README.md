@@ -26,19 +26,13 @@ Details: [TS-ICL paper](https://arxiv.org/abs/2606.05878).
 ### Installation
 
 Running the scripts requires additionnal dependencies gathered in the `bench` group.
-Install as follows:
+Install, e.g. with:
 
 ```bash
 pip install tsicl[bench]
 ```
 
-or 
-
-```bash
-uv add --bench tsicl
-```
-
-The installed dependencies are *datasets<4.0*, *fev>=0.7.0*, *gluonts>=0.16.2*, *scikit-learn>=1.8.0*.
+The installed dependencies are *datasets<4.0*, *fev>=0.7.0*, *gluonts>=0.16.2*.
 
 ### Guidelines
 

@@ -24,6 +24,7 @@ dependencies = [
     "matplotlib>=3.9.2",
     "numpy>=2.1.3",
     "pandas>=2.2.3",
+    "scikit-learn>=1.8.0",
     "seaborn>=0.13.2",
     "torch>=2.5.1,<2.10",
 ]
@@ -37,7 +38,6 @@ bench = [
     "datasets<4.0",
     "fev>=0.7.0",
     "gluonts>=0.16.2",
-    "scikit-learn>=1.8.0"
 ]
 dev = [
     "pytest>=8.0",
