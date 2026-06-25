@@ -7,7 +7,7 @@
 #SBATCH --error=fev.err
 
 CWD=$(pwd)
-SCRIPT='bench/fevbench/'
+SCRIPT='bench/fevbench'
 
 if [[ "$CWD" =~ .*"$SCRIPT".* ]]; then
     cd ../../
