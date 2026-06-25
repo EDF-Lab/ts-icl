@@ -189,45 +189,6 @@ def _install_list_feature_compat() -> None:
         _ff._FEATURE_TYPES["List"] = _ff.Sequence # type: ignore
 
 
-def _prime_task_local(task: fev.Task, root: Path) -> bool:
-    """Load the task's dataset from a local `save_to_disk` snapshot.
-
-    The FEV benchmark yaml targets `autogluon/fev_datasets` on the Hub, whose
-    local on-disk layout here is:
-
-        <root>/<dataset_config>/{dataset_info.json, state.json, data-*.arrow}
-
-    `datasets.load_dataset(path=<root>, name=<config>)` cannot resolve this
-    layout (it only sees a generic "default" parquet config), so we instead
-    monkey-patch `datasets.load_dataset` for the duration of
-    `task.load_full_dataset()` to return `datasets.load_from_disk(config_dir)`
-    directly. All of fev's post-processing (format, validation, id sort,
-    freq inference, fingerprint) then runs unchanged on the Arrow dataset.
-
-    Returns True on success, False when the config directory is missing
-    (caller is expected to skip the task).
-    """
-    if task.dataset_config is None:
-        return True
-
-    config_dir = root / task.dataset_config
-    if not config_dir.exists():
-        return False
-
-    def _load_from_disk(*_args, **_kwargs):
-        local = datasets.load_from_disk(str(config_dir))
-        if isinstance(local, datasets.DatasetDict):
-            for key in ("train", "default"):
-                if key in local:
-                    return local[key]
-            return next(iter(local.values()))
-        return local
-
-    with patch.object(datasets, "load_dataset", side_effect=_load_from_disk):
-        task.load_full_dataset()
-    return True
-
-
 def _set_seed(seed: int) -> None:
     random.seed(seed)
     np.random.seed(seed)
@@ -475,9 +436,11 @@ def main(cfg : DictConfig):
     # get list of tasks:
     tasks: list[fev.Task] = []
     for task in requested_tasks:
-        if _prime_task_local(task, fev_repo):
+        task.dataset_path = str(fev_repo)
+        try:
+            task.load_full_dataset()
             tasks.append(task)
-        else:
+        except:            
             warnings.warn(
                 f"[Data] Skipping task '{task.dataset_config}': no local snapshot at "
                 f"{fev_repo / (task.dataset_config or '')}"
