@@ -9,7 +9,7 @@ By downloading, accessing, using, Distributing (as defined below), or creating a
 
 1. Definitions
 
-a. "Derivative" means any model or work that directly incorporates, in whole or in part, the weights, parameters, or checkpoints of the TS-ICL Model, or that is produced by fine-tuning or distilling the TS-ICL Model (including through the use of its Outputs). This includes any customized or fine-tuned version of the TS-ICL Model produced by direct technical means.
+a. "Derivative" means any model or work that directly incorporates, in whole or in part, the inference code, the weights, parameters, or checkpoints of the TS-ICL Model, or that is produced by fine-tuning or distilling the TS-ICL Model (including through the use of its Outputs). This includes any customized or fine-tuned version of the TS-ICL Model produced by direct technical means.
 
 b. "Distribution," "Distribute," or "Distributing" means providing or making available, by any means, a copy of the TS-ICL Model and/or the Derivatives as the case may be.
 
