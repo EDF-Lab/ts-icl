@@ -28,10 +28,10 @@ class TSICL:
 
         - If provided and the file exists, it's loaded directly.
         - If provided but the file doesn't exist and `allow_auto_download` is true, the version
-          specified by `checkpoint_version` is downloaded from Hugging Face Hub (repo: 'taharnbl/TS-ICL')
+          specified by `checkpoint_version` is downloaded from the Hugging Face Hub repository specified by `hf_repo_id`
           to this path.
         - If `None` (default), the version specified by `checkpoint_version` is downloaded from
-          Hugging Face Hub (repo: 'taharnbl/TS-ICL') and cached locally in the default
+          the Hugging Face Hub repository specified by `hf_repo_id` and cached locally in the default
           Hugging Face cache directory (typically `~/.cache/huggingface/hub`).
 
     allow_auto_download : bool, default=True
@@ -41,19 +41,27 @@ class TSICL:
     checkpoint_version : str, default='tsicl-v1.ckpt'
         Specifies which version of the pre-trained model checkpoint to use when `model_path`
         is `None` or points to a non-existent file (and `allow_auto_download` is true).
-        Checkpoints are downloaded from https://huggingface.co/taharnbl/TS-ICL.
+        Name of the checkpoint file within `hf_repo_id`.
+
+    hf_repo_id : str, default='taharnbl/TS-ICL'
+        Hugging Face repository used to find or download the checkpoint.
+        Ignored when `model_path` points to an existing local file.
+        The checkpoint must contain a compatible 'config'. Networks whose
+        weights are absent ('forecaster' or 'imputer') remain randomly initialized.
     """
 
     def __init__(
         self,
         model_path: str | Path | None = None,
         checkpoint_version: str = 'tsicl-v1.ckpt',
-        allow_auto_download: bool = True
+        allow_auto_download: bool = True,
+        hf_repo_id: str = "taharnbl/TS-ICL",
     ):
 
         self.model_path          = model_path
         self.allow_auto_download = allow_auto_download
         self.checkpoint_version  = checkpoint_version
+        self.hf_repo_id = hf_repo_id
         
         # load model:
         self._load_model()
@@ -69,74 +77,71 @@ class TSICL:
 
         Credits: TabICL repo, https://github.com/soda-inria/tabicl/blob/main/src/tabicl/_sklearn/regressor.py
 
-        It uses `model_path` and `checkpoint_version` to determine the source.
+        It uses `model_path`, `hf_repo_id`, and `checkpoint_version` to determine the source.
          - If `model_path` is specified and exists, it's used directly.
          - If `model_path` is specified but doesn't exist (and auto-download is enabled),
-           the version specified by `checkpoint_version` is downloaded to `model_path`.
+           the file specified by `checkpoint_version` is downloaded from `hf_repo_id` to `model_path`.
          - If `model_path` is None, the version specified by `checkpoint_version` is downloaded
-           from Hugging Face Hub and cached in the default Hugging Face cache directory.
+           from `hf_repo_id` and cached in the default Hugging Face cache directory.
 
         Raises
         ------
         AssertionError
-            If the checkpoint doesn't contain the required 'config' or 'state_dict' keys.
+            If the checkpoint does not contain 'config'.
 
         ValueError
             If a checkpoint cannot be found or downloaded based on the settings.
         """
 
-        hf_repo_ID = 'taharnbl/TS-ICL'
+        hf_repo_id = self.hf_repo_id
         filename = self.checkpoint_version
 
         if self.model_path is None:
             
             try:
                 model_path = Path( hf_hub_download(
-                    repo_id          = hf_repo_ID,
+                    repo_id          = hf_repo_id,
                     filename         = filename,
                     local_files_only = True
                 ) )
             except LocalEntryNotFoundError:
                 if self.allow_auto_download:
-                    print(f"Checkpoint '{filename}' not cached.\n Downloading from Hugging Face Hub ({hf_repo_ID}).\n")
+                    print(f"Checkpoint '{filename}' not cached.\n Downloading from Hugging Face Hub ({hf_repo_id}).\n")
                     model_path = Path( hf_hub_download(
-                        repo_id  = hf_repo_ID,
+                        repo_id  = hf_repo_id,
                         filename = filename
                     ) )
                 else:
                     raise ValueError(
                         f"Checkpoint '{filename}' not cached and automatic download is disabled.\n"
-                        f"Set allow_auto_download=True to download the checkpoint from Hugging Face Hub ({hf_repo_ID})."
+                        f"Set allow_auto_download=True to download the checkpoint from Hugging Face Hub ({hf_repo_id})."
                     )
-            if model_path:
-                checkpoint = torch.load(model_path, map_location = "cpu", weights_only = True)
         
         else:
-            model_path = Path(self.model_path) if isinstance(self.model_path, str) else self.model_path
+            model_path = Path(self.model_path)
 
-            if model_path.exists():
-                checkpoint = torch.load(model_path, map_location = "cpu", weights_only = True)
-            else:
+            if not model_path.exists():
                 if self.allow_auto_download:
                     print(
                         f"Checkpoint not found at '{model_path}'.\n"
-                        f"Downloading '{filename}' from Hugging Face Hub ({hf_repo_ID}) to this location.\n"
+                        f"Downloading '{filename}' from Hugging Face Hub ({hf_repo_id}) to this location.\n"
                     )
                     model_path.parent.mkdir(parents=True, exist_ok=True)
                     cache_path = hf_hub_download(
-                        repo_id  = hf_repo_ID,
+                        repo_id  = hf_repo_id,
                         filename = filename,
                         local_dir = model_path.parent
                     )
-                    Path(cache_path).rename(model_path)
-                    checkpoint = torch.load(model_path, map_location="cpu", weights_only=True)
+                    if Path(cache_path) != model_path:
+                        Path(cache_path).rename(model_path)
                 else:
                     raise ValueError(
                         f"Checkpoint not found at '{model_path}' and automatic download is disabled.\n"
                         f"Either provide a valid checkpoint path, or set allow_auto_download=True to download "
-                        f"'{filename}' from Hugging Face Hub ({hf_repo_ID})."
+                        f"'{filename}' from Hugging Face Hub ({hf_repo_id})."
                     )
         
+        checkpoint = torch.load(model_path, map_location="cpu", weights_only=True)
         assert "config" in checkpoint, "The checkpoint doesn't contain the model configuration."
 
         # instantiate models:
