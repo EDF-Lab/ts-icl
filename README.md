@@ -37,7 +37,7 @@ Model checkpoint can be found on [TS-ICL's Huggingface repo](https://huggingface
 ```python
 from tsicl import TSICL
 
-model = TSICL(model_path="checkpoints/tsicl-v1.ckpt")
+model = TSICL()  # Uses the official checkpoint, downloading it if not cached
 
 # Forecasting — predict the next 96 timesteps
 point, quantiles = model.forecast(
@@ -56,6 +56,38 @@ point, quantiles = model.impute(
 ```
 
 Both methods return a `(point_prediction, quantile_predictions)` tuple. **NaN values are handled natively** — no preprocessing required.
+
+### Checkpoint loading
+
+By default, `TSICL()` loads `tsicl-v1.ckpt` from `taharnbl/TS-ICL` on Hugging Face,
+using the local cache first. To select another repository and checkpoint:
+
+```python
+model = TSICL(
+    hf_repo_id="your-account/your-tsicl-model",
+    checkpoint_version="your-checkpoint.ckpt",
+)
+```
+
+The checkpoint must contain a compatible network configuration (`config`).
+Weights are loaded from `forecaster` and `imputer` when present. If either is
+missing, a message is printed and that network remains randomly initialized.
+
+To load a local checkpoint without downloading:
+
+```python
+model = TSICL(
+    model_path="checkpoints/tsicl-v1.ckpt",
+    allow_auto_download=False,
+)
+```
+
+`model_path` is a local file path, while `hf_repo_id` identifies a Hugging Face
+repository. An existing local file takes priority over the repository settings.
+If the local file is missing and automatic downloading is enabled, the selected
+checkpoint is downloaded from `hf_repo_id` to `model_path`. With `model_path=None`,
+it is stored in the Hugging Face cache. Setting `allow_auto_download=False`
+still allows loading an already cached checkpoint when `model_path=None`.
 
 ---
 
