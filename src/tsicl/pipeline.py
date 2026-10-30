@@ -334,14 +334,15 @@ class TSICL:
             If True, will impute missing values in lookback and covariates before forecasting.
 
         allow_covar_forecast : bool
-            If True, will forecast past-only covariates and use it as extended context.
+            If True, forecast past-only covariates over the target horizon.
+            Otherwise, keep their historical values without predicting their future.
         
         Returns
         -------
         out : Dict[str, torch.Tensor]
             Dict with keys `coords_c` (context coordinates), `coords_t` (target coordinates),
-            `series_c` (context values), `series_t` (target values),
-            `covar_c` (context covariates, if any), `covar_t` (target covariates, if any).
+            `series_c` (context values), `covar_c` (context covariates, if any),
+            and `covar_t` only when future covariates are supplied or explicitly forecast.
         """
         
         if allow_auto_complete:
@@ -407,7 +408,8 @@ class TSICL:
 
             # covariates_c: (b, c, t, 1)
 
-            # optionally, forecast past-only covariates and use as GT:
+            # Keep past-only covariates in covariates_c. Predict their future
+            # only when explicitly requested; otherwise covar_t stays None.
             if (not covar_on_future) and (allow_covar_forecast):
                 covar_t, _ = self.forecast(
                     inputs            = rearrange(covariates_c, 'b c t 1 -> b t c'),
@@ -418,7 +420,6 @@ class TSICL:
                     point_estimator   = 'median',
                     squeeze_output    = False
                 )
-                covar_on_future = True
                 assert isinstance(covar_t, torch.Tensor)
                 covar_t = covar_t.to(series_c.device)
         else:
@@ -435,8 +436,7 @@ class TSICL:
         )
         out['coords_t'] = coords_t
 
-        if covar_on_future:
-            assert isinstance(covar_t, torch.Tensor)
+        if covar_t is not None:
             out['covar_t'] = covar_t # (bs, C, query_seq_len, 1)
 
         return out
@@ -685,8 +685,12 @@ class TSICL:
             The optional covariates available to help forecasting `inputs`.
             Each covariate has length `covar_length` where either
             `covar_length = context_length` (past-only) or
-            `covar_length = context_length + prediction_length` (fuly-observed).
+            `covar_length = context_length + prediction_length` (fully observed).
             Each covariate may contain `NaN` values observed at arbitrary timesteps.
+
+            Past-only covariates are used directly with their historical timestamps
+            and normalized using their historical values. Their future is predicted
+            only if `allow_covar_forecast=True`.
 
             If `inputs` is a list of dicts, with keys `past_covariates` or `future_covariates`,
              `covars` will be overwritten by `inputs`.
@@ -729,8 +733,9 @@ class TSICL:
             and use the reconstructed values as extended context for the target time series.
 
         allow_covar_forecast : bool
-            Allow forecasting of past-only covariates and use forecasted values as
-            extended context for the target time series.
+            If True, forecast past-only covariates and use their predicted future
+            values alongside their history. If False (default), use their history
+            only. Covariates with supplied future values are used as provided.
         
         squeeze_output : bool
             If `True` squeeze all unit dims in the outputs.
@@ -1353,6 +1358,7 @@ class TSICL:
         model = self.imputer if setting == 'imputation' else self.forecaster
 
         series_covar = None
+        coords_covar = None
 
         # replace nans:
         if setting == 'forecasting':
@@ -1364,13 +1370,20 @@ class TSICL:
         scaler.fit(series_c)
         series_c_norm = scaler.transform(series_c)
 
-        # z-normalize covariate series:
+        # Preserve the existing horizon-based scaling when future values are
+        # supplied or forecast. Past-only covariates use historical statistics.
         if (covar_c is not None) and (covar_t is not None):
             scaler_cov = CustomStandardScaler(dim=-2,epsilon=1e-7)
             scaler_cov.fit(covar_t) # type: ignore
             covar_t      = scaler_cov.transform(covar_t)         # (bs, C, query_seq_len, 1)
             covar_c      = scaler_cov.transform(covar_c)         # (bs, C, max_context_len, 1)
             series_covar = torch.cat([covar_c, covar_t], dim=-2) # (bs, C, max_context_len + query_seq_len, 1)
+        elif setting == 'forecasting' and covar_c is not None:
+            # Past-only covariates need no invented or predicted future values.
+            scaler_cov = CustomStandardScaler(dim=-2, epsilon=1e-7)
+            scaler_cov.fit(covar_c)
+            series_covar = scaler_cov.transform(covar_c)
+            coords_covar = coords_c
 
         # build query coords:
         query_coords = torch.cat([coords_c, coords_t], dim=1) # [N, T_in+T, 1]
@@ -1381,7 +1394,7 @@ class TSICL:
             coords               = coords_c,
             target_coords        = query_coords,
             series_covar         = series_covar,
-            coords_covar         = query_coords,
+            coords_covar         = coords_covar if coords_covar is not None else query_coords,
             undo_asinh_transform = True,
             return_latent_only   = return_latent_only
         )
