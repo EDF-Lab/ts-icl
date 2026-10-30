@@ -37,12 +37,11 @@ def validate_target_inputs(
         # for fevbench
         if isinstance(inputs[0], dict):
             # past_covars, future_covars = None, None
-            # self._future_cov_keys = []
             if 'target' not in inputs[0].keys():
                 raise ValueError(
                     f"Dict input should have a 'target' key, received keys {list(inputs[0].keys())} instead"
                 )
-            out, _ = _list_dict_inputs_utils(inputs, key = 'target', _future_cov_keys = []) # Tensor or list[Tensor]
+            out = _list_dict_inputs_utils(inputs, key = 'target') # Tensor or list[Tensor]
             
         elif isinstance(inputs[0], np.ndarray):
             # convert to list of Tensors:
@@ -154,9 +153,8 @@ def _check_input_dim(
 
 def _list_dict_inputs_utils(
     list_inputs: list[dict],
-    key: str,
-    _future_cov_keys: list
-) -> Tuple[torch.Tensor | list | None, list]:
+    key: str
+) -> torch.Tensor | list | None:
 
     first_input = list_inputs[0]
     assert isinstance(first_input, dict)
@@ -178,12 +176,7 @@ def _list_dict_inputs_utils(
         list_keys = list(first_input[key].keys())
         
         if len(list_keys) == 0:
-            return None, _future_cov_keys
-        
-        if len(_future_cov_keys) > 0:
-            list_keys = _future_cov_keys.copy()
-        if key == 'future_covariates':
-            _future_cov_keys = list_keys
+            return None
         
         if not all([all([k in d[key] for k in list_keys]) for d in list_inputs]):
             raise ValueError(
@@ -215,7 +208,7 @@ def _list_dict_inputs_utils(
         if all([x.shape == out[0].shape for x in out]):
             out = torch.stack(out, dim = 0) # (bs, c, t, 1)
 
-    return out, _future_cov_keys
+    return out
 
 
 def validate_covar_inputs(
@@ -253,33 +246,45 @@ def validate_covar_inputs(
 
         elif isinstance(covars[0], dict):
 
-            _future_cov_keys = []
-
             if 'past_covariates' not in covars[0]:
                 warn("no past covariates provided, skip all covariates for forecast")
                 return True, None
             else:
+
+                # Keep every historical channel. Fill only unavailable future
+                # channels with NaNs, using the historical key order for alignment.
+                future_example = next((x['future_covariates'] for x in covars if x.get('future_covariates')), None)
+                if future_example is not None:
+                    horizon = len(next(iter(future_example.values())))
+                    past_keys = list(covars[0]['past_covariates'])
+                    aligned_covars = []
+                    for sample in covars:
+                        past = sample['past_covariates']
+                        future = sample.get('future_covariates', {})
+                        if set(past) != set(past_keys):
+                            raise ValueError('All samples must have the same historical covariate names.')
+                        if not set(future).issubset(past):
+                            raise ValueError('Future covariate names must be a subset of historical covariate names.')
+                        if any(len(value) != horizon for value in future.values()):
+                            raise ValueError('All future covariates must have the same horizon length.')
+                        aligned_future = {
+                            name: future[name] if name in future else torch.full((horizon,), torch.nan)
+                            for name in past_keys
+                        }
+                        aligned_covars.append({**sample, 'future_covariates': aligned_future})
+                    covars = aligned_covars
             
                 # convert covariates as Tensor or list[Tensor]:
                 future_covars = None
                 if 'future_covariates' in covars[0]:
-                    future_covars, _future_cov_keys = _list_dict_inputs_utils(covars, key = 'future_covariates', _future_cov_keys = _future_cov_keys)
+                    future_covars = _list_dict_inputs_utils(covars, key = 'future_covariates')
 
-                past_covars, _future_cov_keys = _list_dict_inputs_utils(covars, key = 'past_covariates', _future_cov_keys = _future_cov_keys)
+                past_covars = _list_dict_inputs_utils(covars, key = 'past_covariates')
                 # is_tensor = isinstance(past_covars, torch.Tensor)
                 
-                if isinstance(past_covars, torch.Tensor) and isinstance(future_covars, torch.Tensor):
-                    if past_covars.shape[1] != future_covars.shape[1]:
-                        raise ValueError(
-                            f"Past and future covariates do not match, shapes {past_covars.shape} vs {future_covars.shape}\
-                                Current version assumes the same set of covariates are observed in past-only and future.\
-                                "
-                        )
-                    covars = torch.cat(
-                        [past_covars, future_covars], dim = -2
-                    ) # (b, c, t, 1)
-                
-                elif isinstance(past_covars, list) and isinstance(future_covars, list):
+                if future_covars is not None:
+                    # Iterate per sample even when only the fixed-length future
+                    # could be stacked: variable-length histories must retain it.
                     covars = [
                         torch.cat([x_c, x_t], dim=-2) for x_c, x_t in zip(past_covars, future_covars)
                     ] # (c, t, 1)
